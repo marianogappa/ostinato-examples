@@ -24,5 +24,40 @@ OstinatoExampleApp().main();
 }; // end init()
 $(document).ready(init);
 </script>
+<span>
+    <pre>
+object OstinatoExampleApp extends JSApp {
+  def main(): Unit = {
+    val initialBoard = ChessGame.fromString("""♜♞♝♛.♝♞♜
+                                              |♟♟♟♟♟♟♟♟
+                                              |........
+                                              |........
+                                              |........
+                                              |........
+                                              |♙♙♙♙♙♙♙♙
+                                              |♖♘♗♕.♗♘♖""".stripMargin).board
+    var board: ChessBoard = initialBoard
+
+    def move() = {
+      val movements = board.movements
+      board = if (movements.isEmpty) initialBoard else board.move(movements.toList(Random.nextInt(movements.size)))
+      Board.position(board.toFen)
+    }
+
+    move()
+    setInterval(280.millis) {
+      move()
+    }
+  }
+}
+
+@JSName("board")
+@js.native
+object Board extends js.Object {
+  def position(a: String): Unit = js.native
+}
+        </pre>
+</span>
+
 </body>
 </html>
