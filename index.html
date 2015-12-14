@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ostinato Example</title>
+    <link rel="stylesheet" href="css/chessboard-0.3.0.min.css" />
+</head>
+<body>
+<div id="board" style="width: 400px"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/chessboard-0.3.0.min.js"></script>
+<script type="text/javascript" src="./target/scala-2.11/ostinato-example-fastopt.js"></script>
+<script>
+var board = null
+
+
+var init = function() {
+
+//--- start example JS ---
+board = ChessBoard('board');
+board.start()
+//--- end example JS ---
+OstinatoExampleApp().main();
+}; // end init()
+$(document).ready(init);
+</script>
+</body>
+</html>
