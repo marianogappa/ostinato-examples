@@ -5706,6 +5706,25 @@ function $h_LOstinatoExampleApp$() {
   /*<skip>*/
 }
 $h_LOstinatoExampleApp$.prototype = $c_LOstinatoExampleApp$.prototype;
+$c_LOstinatoExampleApp$.prototype.OstinatoExampleApp$$move$1__Lboardgame_chess_core_ChessBoard__sr_ObjectRef__V = (function(initialBoard$1, board$1) {
+  var movements = $as_Lboardgame_chess_core_ChessBoard(board$1.elem$1).movements__sci_Set();
+  if (movements.isEmpty__Z()) {
+    var jsx$1 = initialBoard$1
+  } else {
+    var qual$1 = $as_Lboardgame_chess_core_ChessBoard(board$1.elem$1);
+    var this$1 = $m_sci_List$();
+    var cbf = this$1.ReusableCBFInstance$2;
+    var this$3 = $as_sci_List($s_sc_TraversableLike$class__to__sc_TraversableLike__scg_CanBuildFrom__O(movements, cbf));
+    var this$2 = $m_s_util_Random$();
+    var n = movements.size__I();
+    var n$1 = this$2.self$1.nextInt__I__I(n);
+    var x$7 = $as_Lboardgame_chess_core_ChessMovement($s_sc_LinearSeqOptimized$class__apply__sc_LinearSeqOptimized__I__O(this$3, n$1));
+    var x$8 = new $c_Lboardgame_chess_core_ChessRules().init___I__Z__Z__Z__Z((-1), false, false, false, true);
+    var jsx$1 = qual$1.move__Lboardgame_chess_core_ChessMovement__Lboardgame_chess_core_ChessRules__Lboardgame_chess_core_ChessBoard(x$7, x$8)
+  };
+  board$1.elem$1 = jsx$1;
+  $g["board"]["position"]($as_Lboardgame_chess_core_ChessBoard(board$1.elem$1).toFen__T())
+});
 $c_LOstinatoExampleApp$.prototype.init___ = (function() {
   $n_LOstinatoExampleApp$ = this;
   return this
@@ -5724,31 +5743,14 @@ $c_LOstinatoExampleApp$.prototype.main__V = (function() {
   var x$6 = new $c_Lboardgame_chess_core_ChessRules().init___I__Z__Z__Z__Z((-1), false, false, false, true);
   var this$6 = $m_Lboardgame_chess_core_ChessGame$().fromString__T__Lboardgame_chess_core_ChessPlayer__sci_Map__I__I__Lboardgame_chess_core_ChessRules__Lboardgame_chess_core_ChessGame(x$1, x$2, x$3, x$4, x$5, x$6);
   var initialBoard = $as_Lboardgame_chess_core_ChessBoard(this$6.board$1);
-  var board = new $c_sr_ObjectRef().init___O(null);
-  board.elem$1 = initialBoard;
-  $g["board"]["position"]($as_Lboardgame_chess_core_ChessBoard(board.elem$1).toFen__T());
+  var board = new $c_sr_ObjectRef().init___O(initialBoard);
+  this.OstinatoExampleApp$$move$1__Lboardgame_chess_core_ChessBoard__sr_ObjectRef__V(initialBoard, board);
   var jsx$1 = $m_sjs_js_timers_package$();
   var this$9 = new $c_s_concurrent_duration_package$DurationInt().init___I(280);
   var unit = $m_ju_concurrent_TimeUnit$().MILLISECONDS$1;
   jsx$1.setInterval__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetIntervalHandle($m_s_concurrent_duration_package$DurationInt$().durationIn$extension__I__ju_concurrent_TimeUnit__s_concurrent_duration_FiniteDuration(this$9.scala$concurrent$duration$DurationInt$$n$1, unit), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(initialBoard$1, board$1) {
     return (function() {
-      var movements = $as_Lboardgame_chess_core_ChessBoard(board$1.elem$1).movements__sci_Set();
-      if ($s_sc_TraversableOnce$class__nonEmpty__sc_TraversableOnce__Z(movements)) {
-        var qual$1 = $as_Lboardgame_chess_core_ChessBoard(board$1.elem$1);
-        var this$10 = $m_sci_List$();
-        var cbf = this$10.ReusableCBFInstance$2;
-        var this$12 = $as_sci_List($s_sc_TraversableLike$class__to__sc_TraversableLike__scg_CanBuildFrom__O(movements, cbf));
-        var this$11 = $m_s_util_Random$();
-        var n = movements.size__I();
-        var n$1 = this$11.self$1.nextInt__I__I(n);
-        var x$7 = $as_Lboardgame_chess_core_ChessMovement($s_sc_LinearSeqOptimized$class__apply__sc_LinearSeqOptimized__I__O(this$12, n$1));
-        var x$8 = new $c_Lboardgame_chess_core_ChessRules().init___I__Z__Z__Z__Z((-1), false, false, false, true);
-        board$1.elem$1 = qual$1.move__Lboardgame_chess_core_ChessMovement__Lboardgame_chess_core_ChessRules__Lboardgame_chess_core_ChessBoard(x$7, x$8);
-        $g["board"]["position"]($as_Lboardgame_chess_core_ChessBoard(board$1.elem$1).toFen__T())
-      } else {
-        board$1.elem$1 = initialBoard$1;
-        $g["board"]["position"]($as_Lboardgame_chess_core_ChessBoard(board$1.elem$1).toFen__T())
-      }
+      $m_LOstinatoExampleApp$().OstinatoExampleApp$$move$1__Lboardgame_chess_core_ChessBoard__sr_ObjectRef__V(initialBoard$1, board$1)
     })
   })(initialBoard, board)))
 });

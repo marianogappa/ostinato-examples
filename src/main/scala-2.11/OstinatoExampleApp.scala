@@ -18,30 +18,19 @@ object OstinatoExampleApp extends JSApp {
                                               |........
                                               |♙♙♙♙♙♙♙♙
                                               |♖♘♗♕.♗♘♖""".stripMargin).board
+    var board: ChessBoard = initialBoard
 
-    var board: ChessBoard = null
-    board = initialBoard
-    Board.position(board.toFen)
-
-    setInterval(280.millis) {
+    def move() = {
       val movements = board.movements
+      board = if (movements.isEmpty) initialBoard else board.move(movements.toList(Random.nextInt(movements.size)))
+      Board.position(board.toFen)
+    }
 
-      if (movements.nonEmpty) {
-        board = board.move(movements.toList(Random.nextInt(movements.size)))
-        Board.position(board.toFen)
-      }
-      else {
-        board = initialBoard
-        Board.position(board.toFen)
-      }
+    move()
+    setInterval(280.millis) {
+      move()
     }
   }
-
-}
-
-@js.native
-object DOMGlobalScope extends js.GlobalScope {
-  def alert(message: String): Unit = js.native
 }
 
 @JSName("board")
