@@ -20,7 +20,7 @@ object OstinatoExampleApp extends JSApp {
     }
 
     move()
-    setInterval(280.millis) {
+    setInterval(300.millis) {
       move()
     }
   }

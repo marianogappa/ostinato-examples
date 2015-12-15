@@ -5716,7 +5716,7 @@ $c_LOstinatoExampleApp$.prototype.main__V = (function() {
   var board = new $c_sr_ObjectRef().init___O(initialBoard);
   this.OstinatoExampleApp$$move$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__V(initialBoard, board);
   var jsx$1 = $m_sjs_js_timers_package$();
-  var this$4 = new $c_s_concurrent_duration_package$DurationInt().init___I(280);
+  var this$4 = new $c_s_concurrent_duration_package$DurationInt().init___I(300);
   var unit = $m_ju_concurrent_TimeUnit$().MILLISECONDS$1;
   jsx$1.setInterval__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetIntervalHandle($m_s_concurrent_duration_package$DurationInt$().durationIn$extension__I__ju_concurrent_TimeUnit__s_concurrent_duration_FiniteDuration(this$4.scala$concurrent$duration$DurationInt$$n$1, unit), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(initialBoard$1, board$1) {
     return (function() {
