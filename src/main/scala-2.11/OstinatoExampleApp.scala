@@ -5,19 +5,12 @@ import scala.scalajs.js.timers._
 import scala.concurrent.duration._
 import org.scalajs.dom
 import dom.document
-import boardgame.chess.core._
+import ostinato.chess.core._
 import scala.util.Random
 
 object OstinatoExampleApp extends JSApp {
   def main(): Unit = {
-    val initialBoard = ChessGame.fromString("""♜♞♝♛.♝♞♜
-                                              |♟♟♟♟♟♟♟♟
-                                              |........
-                                              |........
-                                              |........
-                                              |........
-                                              |♙♙♙♙♙♙♙♙
-                                              |♖♘♗♕.♗♘♖""".stripMargin).board
+    val initialBoard = ChessGame.defaultGame.board
     var board: ChessBoard = initialBoard
 
     def move() = {
