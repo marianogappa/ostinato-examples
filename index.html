@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>Ostinato Example</title>
     <link rel="stylesheet" href="css/chessboard-0.3.0.min.css" />
+    <style>
+        body {
+            font-size: 13px;
+        }
+        b {
+            font-size: 13px;
+            font-weight: normal;
+            color: green;
+        }
+    </style>
 </head>
 <body>
 <div id="board" style="width: 400px"></div>
@@ -25,16 +35,24 @@ OstinatoExampleApp().main();
 $(document).ready(init);
 </script>
 <span>
-    <pre>
+    <h1>Source Code</h1>
+
+    <pre><b>// ostinato code in green</b>
 object OstinatoExampleApp extends JSApp {
   def main(): Unit = {
-    val initialBoard = ChessGame.defaultGame.board
+    <b>val initialBoard = ChessGame.defaultGame.board
     var board: ChessBoard = initialBoard
+    val ai: Map[ChessPlayer, ChessRandomAi] = Map(
+      WhiteChessPlayer -> ChessRandomAi(WhiteChessPlayer),
+      BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
+    )</b>
 
     def move() = {
-      val movements = board.movements
-      board = if (movements.isEmpty) initialBoard else board.move(movements.toList(Random.nextInt(movements.size)))
-      Board.position(board.toFen)
+      <b>board = ai(board.turn).move(board.game) match {
+        case m: DrawMovement ⇒ initialBoard
+        case m               ⇒ board.move(m)
+      }</b>
+      Board.position(<b>board.toFen</b>)
     }
 
     move()

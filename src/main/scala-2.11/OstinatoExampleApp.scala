@@ -1,21 +1,26 @@
+import ostinato.chess.ai.ChessRandomAi
+
 import scala.scalajs.js
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.timers._
 import scala.concurrent.duration._
-import org.scalajs.dom
-import dom.document
 import ostinato.chess.core._
-import scala.util.Random
 
 object OstinatoExampleApp extends JSApp {
   def main(): Unit = {
     val initialBoard = ChessGame.defaultGame.board
     var board: ChessBoard = initialBoard
+    val ai: Map[ChessPlayer, ChessRandomAi] = Map(
+      WhiteChessPlayer -> ChessRandomAi(WhiteChessPlayer),
+      BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
+    )
 
     def move() = {
-      val movements = board.movements
-      board = if (movements.isEmpty) initialBoard else board.move(movements.toList(Random.nextInt(movements.size)))
+      board = ai(board.turn).move(board.game) match {
+        case m: DrawMovement ⇒ initialBoard
+        case m               ⇒ board.move(m)
+      }
       Board.position(board.toFen)
     }
 
