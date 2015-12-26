@@ -8,7 +8,7 @@ scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   "org.gappa" %%% "ostinato" % "0.1-SNAPSHOT",
-  "org.scala-js" %%% "scalajs-dom" % "0.8.0"
+  "org.scala-js" %%% "scalajs-dom" % "0.8.2"
 )
 
 scalaJSStage in Global := FastOptStage

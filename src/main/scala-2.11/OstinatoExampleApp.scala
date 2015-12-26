@@ -16,17 +16,17 @@ object OstinatoExampleApp extends JSApp {
       BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
     )
 
-    def move() = {
-      board = ai(board.turn).move(board.game) match {
-        case m: DrawMovement ⇒ initialBoard
-        case m               ⇒ board.move(m)
+    def doAction() = {
+      board = ai(board.turn).nextAction(board.game) match {
+        case m: DrawAction ⇒ initialBoard
+        case m             ⇒ board.doAction(m).get
       }
       Board.position(board.toFen)
     }
 
-    move()
+    doAction()
     setInterval(300.millis) {
-      move()
+      doAction()
     }
   }
 }
