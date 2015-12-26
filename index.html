@@ -2,73 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ostinato Example</title>
-    <link rel="stylesheet" href="css/chessboard-0.3.0.min.css" />
+    <title>Ostinato Library Examples</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <style>
         body {
-            font-size: 13px;
+            padding: 0px;
+            margin: 0px;
         }
-        b {
-            font-size: 13px;
-            font-weight: normal;
-            color: green;
+        footer {
+            position: fixed; bottom: 0px; width: 100%; height: 50px; background-color: gray; color: white;
+            line-height: 50px;
+            padding-left: 15px;
+        }
+            footer a {
+            font-family: "Open Sans", sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+            padding-right: 15px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        section {
+            padding-left: 15px;
+        }
+        section ul li {
+            margin-bottom: 10px;
+        }
+        section ul li a {
+            color: rgb(0, 0, 238);
         }
     </style>
 </head>
+<section>
+    <h1>Ostinato Library Examples</h1>
+    <ul>
+        <li><a href="autoplay.html">Chess Auto-play</a><br/> a chess match played by AI on both sides</li>
+        <li><a href="parser.html">Chess Match Parser</a><br/> parse a chess match in any known notation</li>
+    </ul>
+</section>
+
 <body>
-<div id="board" style="width: 400px"></div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/chessboard-0.3.0.min.js"></script>
-<script type="text/javascript" src="./target/scala-2.11/ostinato-example-fastopt.js"></script>
-<script>
-var board = null
-
-
-var init = function() {
-
-//--- start example JS ---
-board = ChessBoard('board');
-board.start()
-//--- end example JS ---
-OstinatoExampleApp().main();
-}; // end init()
-$(document).ready(init);
-</script>
-<span>
-    <h1>Source Code</h1>
-
-    <pre><b>// ostinato code in green</b>
-object OstinatoExampleApp extends JSApp {
-  def main(): Unit = {
-    <b>val initialBoard = ChessGame.defaultGame.board
-    var board: ChessBoard = initialBoard
-    val ai: Map[ChessPlayer, ChessRandomAi] = Map(
-      WhiteChessPlayer -> ChessRandomAi(WhiteChessPlayer),
-      BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
-    )</b>
-
-    def move() = {
-      <b>board = ai(board.turn).move(board.game) match {
-        case m: DrawMovement ⇒ initialBoard
-        case m               ⇒ board.move(m)
-      }</b>
-      Board.position(<b>board.toFen</b>)
-    }
-
-    move()
-    setInterval(300.millis) {
-      move()
-    }
-  }
-}
-
-@JSName("board")
-@js.native
-object Board extends js.Object {
-  def position(a: String): Unit = js.native
-}
-        </pre>
-</span>
+<footer>
+    <a href="https://twitter.com/MarianoGappa">@MarianoGappa</a> <a href="https://github.com/MarianoGappa/ostinato">Ostinato Library</a> <a href="https://github.com/MarianoGappa/ostinato/issues">Bug Report</a>
+    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-hashtags="ostinato">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</footer>
 
 </body>
 </html>
