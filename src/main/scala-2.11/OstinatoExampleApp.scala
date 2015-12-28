@@ -17,15 +17,15 @@ object OstinatoExampleApp extends JSApp {
     )
 
     def doAction() = {
-      board = ai(board.turn).nextAction(board.game) match {
-        case m: DrawAction ⇒ initialBoard
-        case m             ⇒ board.doAction(m).get
+      board = ai(board.turn).nextNonFinalAction(board.game) match {
+        case Some(a) ⇒ board.doAction(a).get
+        case None    ⇒ initialBoard
       }
       Board.position(board.toFen)
     }
 
     doAction()
-    setInterval(300.millis) {
+    setInterval(400.millis) {
       doAction()
     }
   }
