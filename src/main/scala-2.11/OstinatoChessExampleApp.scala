@@ -1,4 +1,4 @@
-import ostinato.chess.ai.ChessRandomAi
+import ostinato.chess.ai.{ChessBasicAi, ChessRandomAi}
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -29,10 +29,7 @@ object OstinatoChessExampleApp extends JSApp {
 }
 
 object OstinatoProxy {
-  def randomMove(game: ChessGame) = {
-    val ai = ChessRandomAi(BlackChessPlayer)
-    ai.nextNonFinalAction(game).getOrElse(ai.nextAction(game).get)
-  }
+  def randomMove(game: ChessGame) = ChessBasicAi(BlackChessPlayer).nextAction(game).get
 
   def move(game: ChessGame, from: String, to: String) = {
     val fromPos = ChessXY.fromAn(from).get
