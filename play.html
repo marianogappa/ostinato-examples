@@ -81,11 +81,13 @@ var onDragStart = function(source, piece, position, orientation) {
   }
 };
 
+var move = function() { OstinatoChessExampleApp().randomMove() }
+
 var onDrop = function(source, target) {
   if (OstinatoChessExampleApp().move(source, target) === false)
     return 'snapback';
 
-  window.setTimeout(OstinatoChessExampleApp().randomMove(), 250);
+  window.setTimeout(move, 250);
 };
 
 // update the board position after the piece snap
