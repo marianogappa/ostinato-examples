@@ -1243,7 +1243,7 @@ $c_Lostinato_chess_core_Notation$.prototype.allPossibleNotations__Lostinato_ches
     return $as_sci_Set(this.iccfPromote$1__p1__Lostinato_chess_core_PromoteAction__Lostinato_chess_core_ChessRules__sci_Set(x6, rules).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.canPromote$1__p1__Lostinato_chess_core_PromoteAction__Lostinato_chess_core_ChessRules__sci_Set(x6, rules)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.smithPromote$1__p1__Lostinato_chess_core_PromoteAction__Lostinato_chess_core_ChessRules__sci_Set(x6, rules)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.anPromote$1__p1__Lostinato_chess_core_PromoteAction__Lostinato_chess_core_ChessRules__sci_Set(x6, rules)))
   } else if ($is_Lostinato_chess_core_CastlingAction(a)) {
     var x7 = $as_Lostinato_chess_core_CastlingAction(a);
-    return $as_sci_Set(this.iccfAction$1__p1__Lostinato_chess_core_ChessAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__sci_Set(x7)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.smithCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.descriptiveCastling$1__p1__Lostinato_chess_core_CastlingAction__sci_Set(x7)))
+    return $as_sci_Set(this.iccfAction$1__p1__Lostinato_chess_core_ChessAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.smithCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules)).$$plus$plus__sc_GenTraversableOnce__sc_Set(this.descriptiveCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set(x7, rules)))
   } else if ($is_Lostinato_chess_core_DrawAction(a)) {
     var x8 = $as_Lostinato_chess_core_DrawAction(a);
     return this.genericDraw$1__p1__Lostinato_chess_core_DrawAction__sci_Set(x8)
@@ -1739,25 +1739,42 @@ $c_Lostinato_chess_core_Notation$.prototype.canCapture$1__p1__Lostinato_chess_co
   var s$2 = jsx$7.$$times__sci_Set__sci_Set($as_sci_Set(jsx$2));
   return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$2).$$times__sci_Set__sci_Set(this.checkAndCheckMate$1__p1__Z__Z__sci_Set(a.isCheck$3, a.isCheckmate$3))
 });
-$c_Lostinato_chess_core_Notation$.prototype.descriptiveCastling$1__p1__Lostinato_chess_core_CastlingAction__sci_Set = (function(a) {
-  var jsx$2 = this.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__sci_Set(a);
-  var array = ["Castles", "castles"];
-  if (($uI(array["length"]) === 0)) {
-    var jsx$1 = $m_sci_Set$EmptySet$()
-  } else {
-    var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
-    var i = 0;
-    var len = $uI(array["length"]);
-    while ((i < len)) {
-      var index = i;
-      var arg1 = array[index];
-      b.$$plus$eq__O__scm_SetBuilder(arg1);
-      i = ((1 + i) | 0)
+$c_Lostinato_chess_core_Notation$.prototype.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set = (function(a, rules$1) {
+  if (a.isKingside__Lostinato_chess_core_ChessRules__Z(rules$1)) {
+    var array = ["0-0", "O-O"];
+    if (($uI(array["length"]) === 0)) {
+      var jsx$1 = $m_sci_Set$EmptySet$()
+    } else {
+      var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+      var i = 0;
+      var len = $uI(array["length"]);
+      while ((i < len)) {
+        var index = i;
+        var arg1 = array[index];
+        b.$$plus$eq__O__scm_SetBuilder(arg1);
+        i = ((1 + i) | 0)
+      };
+      var jsx$1 = b.elems$1
     };
-    var jsx$1 = b.elems$1
-  };
-  var s = $as_sci_Set(jsx$2.$$plus$plus__sc_GenTraversableOnce__sc_Set(jsx$1));
-  return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s).$$times__sci_Set__sci_Set(this.checkAndCheckMate$1__p1__Z__Z__sci_Set(a.isCheck$3, a.isCheckmate$3))
+    return $as_sci_Set(jsx$1)
+  } else {
+    var array$1 = ["0-0-0", "O-O"];
+    if (($uI(array$1["length"]) === 0)) {
+      var jsx$2 = $m_sci_Set$EmptySet$()
+    } else {
+      var b$1 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+      var i$1 = 0;
+      var len$1 = $uI(array$1["length"]);
+      while ((i$1 < len$1)) {
+        var index$1 = i$1;
+        var arg1$1 = array$1[index$1];
+        b$1.$$plus$eq__O__scm_SetBuilder(arg1$1);
+        i$1 = ((1 + i$1) | 0)
+      };
+      var jsx$2 = b$1.elems$1
+    };
+    return $as_sci_Set(jsx$2)
+  }
 });
 $c_Lostinato_chess_core_Notation$.prototype.genericDraw$1__p1__Lostinato_chess_core_DrawAction__sci_Set = (function(a) {
   var array = ["\u00bd\u2013\u00bd", "draws", "1/2-1/2"];
@@ -1927,7 +1944,7 @@ $c_Lostinato_chess_core_Notation$.prototype.smithCastling$1__p1__Lostinato_chess
   var this$3 = $as_Lostinato_chess_core_$u265A(a.fromPiece$2);
   var pos$1 = this$3.pos$1.$$plus__Lostinato_core_XY__Lostinato_core_XY(a.delta$2);
   var s$1 = jsx$1.$$times__T__sci_Set(new $c_Lostinato_chess_core_package$ChessXY().init___Lostinato_core_XY(pos$1).toAn__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__Lostinato_chess_core_package$AnPos(rules$1, $m_Lostinato_chess_core_package$().chessBoardSize$1).toString__T());
-  return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$1).$$times__T__sci_Set((a.isKingside__Z() ? "c" : "C"))
+  return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$1).$$times__T__sci_Set((a.isKingside__Lostinato_chess_core_ChessRules__Z(rules$1) ? "c" : "C"))
 });
 $c_Lostinato_chess_core_Notation$.prototype.prepareMatchString__p1__T__AT = (function(s) {
   var thiz = $m_sjsr_RuntimeString$().replaceAll__T__T__T__T($m_sjsr_RuntimeString$().replaceAll__T__T__T__T($m_sjsr_RuntimeString$().replaceAll__T__T__T__T(s, "\\s+|\\d+\\.|\\[[^\\]]*\\]", " "), " +", " "), "[\\?!]*", "");
@@ -1996,43 +2013,6 @@ $c_Lostinato_chess_core_Notation$.prototype.anMove$1__p1__Lostinato_chess_core_C
   var pos$2 = a.fromPiece__Lostinato_chess_core_ChessPiece().pos__Lostinato_core_XY().$$plus__Lostinato_core_XY__Lostinato_core_XY(a.delta__Lostinato_core_XY());
   var s$2 = jsx$6.$$times__T__sci_Set(new $c_Lostinato_chess_core_package$ChessXY().init___Lostinato_core_XY(pos$2).toAn__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__Lostinato_chess_core_package$AnPos(rules$1, $m_Lostinato_chess_core_package$().chessBoardSize$1).toString__T());
   return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$2).$$times__sci_Set__sci_Set(this.checkAndCheckMate$1__p1__Z__Z__sci_Set(a.isCheck__Z(), a.isCheckmate__Z()))
-});
-$c_Lostinato_chess_core_Notation$.prototype.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__sci_Set = (function(a) {
-  if (a.isKingside__Z()) {
-    var array = ["0-0", "O-O"];
-    if (($uI(array["length"]) === 0)) {
-      var jsx$1 = $m_sci_Set$EmptySet$()
-    } else {
-      var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
-      var i = 0;
-      var len = $uI(array["length"]);
-      while ((i < len)) {
-        var index = i;
-        var arg1 = array[index];
-        b.$$plus$eq__O__scm_SetBuilder(arg1);
-        i = ((1 + i) | 0)
-      };
-      var jsx$1 = b.elems$1
-    };
-    return $as_sci_Set(jsx$1)
-  } else {
-    var array$1 = ["0-0-0", "O-O"];
-    if (($uI(array$1["length"]) === 0)) {
-      var jsx$2 = $m_sci_Set$EmptySet$()
-    } else {
-      var b$1 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
-      var i$1 = 0;
-      var len$1 = $uI(array$1["length"]);
-      while ((i$1 < len$1)) {
-        var index$1 = i$1;
-        var arg1$1 = array$1[index$1];
-        b$1.$$plus$eq__O__scm_SetBuilder(arg1$1);
-        i$1 = ((1 + i$1) | 0)
-      };
-      var jsx$2 = b$1.elems$1
-    };
-    return $as_sci_Set(jsx$2)
-  }
 });
 $c_Lostinato_chess_core_Notation$.prototype.smithPromote$1__p1__Lostinato_chess_core_PromoteAction__Lostinato_chess_core_ChessRules__sci_Set = (function(a, rules$1) {
   $m_Lostinato_chess_core_package$();
@@ -2285,6 +2265,26 @@ $c_Lostinato_chess_core_Notation$.prototype.descriptiveCapturePromote$1__p1__Los
   var s$2 = new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$1).$$times__sci_Set__sci_Set(a.capturedPiece$3.toDn__sci_Set());
   var s$3 = new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$2).$$times__sci_Set__sci_Set(this.genericPromotion$1__p1__Lostinato_chess_core_ChessPiece__sci_Set(a.promotePiece$3));
   return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s$3).$$times__sci_Set__sci_Set(this.checkAndCheckMate$1__p1__Z__Z__sci_Set(a.isCheck$3, a.isCheckmate$3))
+});
+$c_Lostinato_chess_core_Notation$.prototype.descriptiveCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set = (function(a, rules$1) {
+  var jsx$2 = this.genericCastling$1__p1__Lostinato_chess_core_CastlingAction__Lostinato_chess_core_ChessRules__sci_Set(a, rules$1);
+  var array = ["Castles", "castles"];
+  if (($uI(array["length"]) === 0)) {
+    var jsx$1 = $m_sci_Set$EmptySet$()
+  } else {
+    var b = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
+    var i = 0;
+    var len = $uI(array["length"]);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      b.$$plus$eq__O__scm_SetBuilder(arg1);
+      i = ((1 + i) | 0)
+    };
+    var jsx$1 = b.elems$1
+  };
+  var s = $as_sci_Set(jsx$2.$$plus$plus__sc_GenTraversableOnce__sc_Set(jsx$1));
+  return new $c_Lostinato_chess_core_Notation$CartesianProductableStringSet$2().init___sci_Set(s).$$times__sci_Set__sci_Set(this.checkAndCheckMate$1__p1__Z__Z__sci_Set(a.isCheck$3, a.isCheckmate$3))
 });
 $c_Lostinato_chess_core_Notation$.prototype.canCapturePromote$1__p1__Lostinato_chess_core_CapturePromoteAction__Lostinato_chess_core_ChessRules__sci_Set = (function(a, rules$1) {
   $m_Lostinato_chess_core_package$();
@@ -3010,7 +3010,7 @@ $c_Lostinato_chess_core_package$ChessXY.prototype.iccfConversions$lzycompute__p1
 $c_Lostinato_chess_core_package$ChessXY.prototype.toAn__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__Lostinato_chess_core_package$AnPos = (function(rules, chessBoardSize) {
   if ((rules.whitePawnDirection$2 === 1)) {
     var $$this = $m_Lostinato_chess_core_package$ChessXY$().chars__T();
-    var index = this.pos$1.x$1;
+    var index = (((((-1) + chessBoardSize.x$1) | 0) - this.pos$1.x$1) | 0);
     return new $c_Lostinato_chess_core_package$AnPos().init___C__I((65535 & $uI($$this["charCodeAt"](index))), ((1 + this.pos$1.y$1) | 0))
   } else {
     var $$this$1 = $m_Lostinato_chess_core_package$ChessXY$().chars__T();
@@ -5915,6 +5915,9 @@ function $h_scg_GenMapFactory() {
   /*<skip>*/
 }
 $h_scg_GenMapFactory.prototype = $c_scg_GenMapFactory.prototype;
+$c_scg_GenMapFactory.prototype.apply__sc_Seq__sc_GenMap = (function(elems) {
+  return $as_sc_GenMap($as_scm_Builder(this.newBuilder__scm_Builder().$$plus$plus$eq__sc_TraversableOnce__scg_Growable(elems)).result__O())
+});
 $c_scg_GenMapFactory.prototype.newBuilder__scm_Builder = (function() {
   return new $c_scm_MapBuilder().init___sc_GenMap(this.empty__sc_GenMap())
 });
@@ -6022,6 +6025,16 @@ function $h_sci_HashMap$Merger() {
   /*<skip>*/
 }
 $h_sci_HashMap$Merger.prototype = $c_sci_HashMap$Merger.prototype;
+function $s_sci_MapLike$class__$$plus$plus__sci_MapLike__sc_GenTraversableOnce__sci_Map($$this, xs) {
+  var x$1 = $as_sci_Map($$this);
+  return $as_sci_Map(xs.seq__sc_TraversableOnce().$$div$colon__O__F2__O(x$1, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($$this$1) {
+    return (function(x$2$2, x$3$2) {
+      var x$2 = $as_sci_Map(x$2$2);
+      var x$3 = $as_T2(x$3$2);
+      return x$2.$$plus__T2__sci_Map(x$3)
+    })
+  })($$this))))
+}
 function $s_sci_MapLike$class__updated__sci_MapLike__O__O__sci_Map($$this, key, value) {
   return $$this.$$plus__T2__sci_Map(new $c_T2().init___O__O(key, value))
 }
@@ -7422,8 +7435,8 @@ function $h_sjs_js_timers_package$() {
   /*<skip>*/
 }
 $h_sjs_js_timers_package$.prototype = $c_sjs_js_timers_package$.prototype;
-$c_sjs_js_timers_package$.prototype.setInterval__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetIntervalHandle = (function(interval, body) {
-  return $g["setInterval"]((function(f) {
+$c_sjs_js_timers_package$.prototype.setTimeout__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetTimeoutHandle = (function(interval, body) {
+  return $g["setTimeout"]((function(f) {
     return (function() {
       return f.apply__O()
     })
@@ -8316,7 +8329,29 @@ $c_LOstinatoExampleApp$.prototype.init___ = (function() {
   $n_LOstinatoExampleApp$ = this;
   return this
 });
-$c_LOstinatoExampleApp$.prototype.OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__V = (function(initialBoard$1, board$1, ai$1) {
+$c_LOstinatoExampleApp$.prototype.main__V = (function() {
+  var this$1 = $m_Lostinato_chess_core_ChessGame$().defaultGame$1;
+  var initialBoard = $as_Lostinato_chess_core_ChessBoard(this$1.board$1);
+  var board = new $c_sr_ObjectRef().init___O(initialBoard);
+  var $$this = $m_Lostinato_chess_core_WhiteChessPlayer$();
+  var y = new $c_Lostinato_chess_ai_ChessRandomAi().init___Lostinato_chess_core_ChessPlayer__s_Option($m_Lostinato_chess_core_WhiteChessPlayer$(), $m_s_None$());
+  var jsx$1 = new $c_T2().init___O__O($$this, y);
+  var $$this$1 = $m_Lostinato_chess_core_BlackChessPlayer$();
+  var y$1 = new $c_Lostinato_chess_ai_ChessRandomAi().init___Lostinato_chess_core_ChessPlayer__s_Option($m_Lostinato_chess_core_BlackChessPlayer$(), $m_s_None$());
+  var array = [jsx$1, new $c_T2().init___O__O($$this$1, y$1)];
+  var this$10 = new $c_scm_MapBuilder().init___sc_GenMap($m_sci_Map$EmptyMap$());
+  var i = 0;
+  var len = $uI(array["length"]);
+  while ((i < len)) {
+    var index = i;
+    var arg1 = array[index];
+    this$10.$$plus$eq__T2__scm_MapBuilder($as_T2(arg1));
+    i = ((1 + i) | 0)
+  };
+  var ai = $as_sci_Map(this$10.elems$1);
+  this.OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__sjs_js_timers_SetTimeoutHandle(initialBoard, board, ai)
+});
+$c_LOstinatoExampleApp$.prototype.OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__sjs_js_timers_SetTimeoutHandle = (function(initialBoard$1, board$1, ai$1) {
   var qual$2 = $as_Lostinato_chess_ai_ChessRandomAi(ai$1.apply__O__O($as_Lostinato_chess_core_ChessBoard(board$1.elem$1).turn$2));
   var qual$1 = $as_Lostinato_chess_core_ChessBoard(board$1.elem$1);
   var x$1 = new $c_Lostinato_chess_core_ChessRules().init___I__Z__Z__Z__Z((-1), false, false, false, true);
@@ -8339,37 +8374,15 @@ $c_LOstinatoExampleApp$.prototype.OstinatoExampleApp$$doAction$1__Lostinato_ches
     }
   };
   board$1.elem$1 = jsx$1;
-  $g["board"]["position"]($as_Lostinato_chess_core_ChessBoard(board$1.elem$1).toFen__T())
-});
-$c_LOstinatoExampleApp$.prototype.main__V = (function() {
-  var this$1 = $m_Lostinato_chess_core_ChessGame$().defaultGame$1;
-  var initialBoard = $as_Lostinato_chess_core_ChessBoard(this$1.board$1);
-  var board = new $c_sr_ObjectRef().init___O(initialBoard);
-  var $$this = $m_Lostinato_chess_core_WhiteChessPlayer$();
-  var y = new $c_Lostinato_chess_ai_ChessRandomAi().init___Lostinato_chess_core_ChessPlayer__s_Option($m_Lostinato_chess_core_WhiteChessPlayer$(), $m_s_None$());
-  var jsx$1 = new $c_T2().init___O__O($$this, y);
-  var $$this$1 = $m_Lostinato_chess_core_BlackChessPlayer$();
-  var y$1 = new $c_Lostinato_chess_ai_ChessRandomAi().init___Lostinato_chess_core_ChessPlayer__s_Option($m_Lostinato_chess_core_BlackChessPlayer$(), $m_s_None$());
-  var array = [jsx$1, new $c_T2().init___O__O($$this$1, y$1)];
-  var this$10 = new $c_scm_MapBuilder().init___sc_GenMap($m_sci_Map$EmptyMap$());
-  var i = 0;
-  var len = $uI(array["length"]);
-  while ((i < len)) {
-    var index = i;
-    var arg1 = array[index];
-    this$10.$$plus$eq__T2__scm_MapBuilder($as_T2(arg1));
-    i = ((1 + i) | 0)
-  };
-  var ai = $as_sci_Map(this$10.elems$1);
-  this.OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__V(initialBoard, board, ai);
+  $g["board"]["position"]($as_Lostinato_chess_core_ChessBoard(board$1.elem$1).toFen__T());
   var jsx$2 = $m_sjs_js_timers_package$();
-  var this$12 = new $c_s_concurrent_duration_package$DurationInt().init___I(400);
+  var this$5 = new $c_s_concurrent_duration_package$DurationInt().init___I(600);
   var unit = $m_ju_concurrent_TimeUnit$().MILLISECONDS$1;
-  jsx$2.setInterval__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetIntervalHandle($m_s_concurrent_duration_package$DurationInt$().durationIn$extension__I__ju_concurrent_TimeUnit__s_concurrent_duration_FiniteDuration(this$12.scala$concurrent$duration$DurationInt$$n$1, unit), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(initialBoard$1, board$1, ai$1) {
+  return jsx$2.setTimeout__s_concurrent_duration_FiniteDuration__F0__sjs_js_timers_SetTimeoutHandle($m_s_concurrent_duration_package$DurationInt$().durationIn$extension__I__ju_concurrent_TimeUnit__s_concurrent_duration_FiniteDuration(this$5.scala$concurrent$duration$DurationInt$$n$1, unit), new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(initialBoard$1$1, board$1$1, ai$1$1) {
     return (function() {
-      $m_LOstinatoExampleApp$().OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__V(initialBoard$1, board$1, ai$1)
+      $m_LOstinatoExampleApp$().OstinatoExampleApp$$doAction$1__Lostinato_chess_core_ChessBoard__sr_ObjectRef__sci_Map__sjs_js_timers_SetTimeoutHandle(initialBoard$1$1, board$1$1, ai$1$1)
     })
-  })(initialBoard, board, ai)))
+  })(initialBoard$1, board$1, ai$1)))
 });
 $c_LOstinatoExampleApp$.prototype.$$js$exported$meth$main__O = (function() {
   this.main__V()
@@ -9013,11 +9026,12 @@ $c_Lostinato_chess_core_ChessPiece.prototype.threatenedBy__Lostinato_chess_core_
       var x$9 = board$3.castlingAvailable$2;
       var x$10 = board$3.fullMoveNumber$2;
       var x$11 = board$3.halfMoveClock$2;
-      var jsx$1 = new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I(x$7, x$6, x$8, x$9, x$10, x$11);
-      var x$14 = rules$3.whitePawnDirection$2;
-      var x$15 = rules$3.allowImpossibleBoards$2;
-      var x$16 = rules$3.noKingMeansLoss$2;
-      return x$2.canMoveTo__Lostinato_core_XY__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(jsx$2, jsx$1, new $c_Lostinato_chess_core_ChessRules().init___I__Z__Z__Z__Z(x$14, true, x$15, x$16, false))
+      var x$12 = board$3.pastBoards$2;
+      var jsx$1 = new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(x$7, x$6, x$8, x$9, x$10, x$11, x$12);
+      var x$15 = rules$3.whitePawnDirection$2;
+      var x$16 = rules$3.allowImpossibleBoards$2;
+      var x$17 = rules$3.noKingMeansLoss$2;
+      return x$2.canMoveTo__Lostinato_core_XY__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(jsx$2, jsx$1, new $c_Lostinato_chess_core_ChessRules().init___I__Z__Z__Z__Z(x$15, true, x$16, x$17, false))
     })
   })(this, board, rules))))
 });
@@ -9080,7 +9094,7 @@ function $h_Lostinato_chess_core_ChessPlayer() {
 }
 $h_Lostinato_chess_core_ChessPlayer.prototype = $c_Lostinato_chess_core_ChessPlayer.prototype;
 $c_Lostinato_chess_core_ChessPlayer.prototype.actions__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__sci_Set = (function(board, rules) {
-  var _1 = board.insufficientMaterial__Z();
+  var _1 = board.hasInsufficientMaterial__Z();
   var _2 = $c_Lostinato_core_Player.prototype.actions__Lostinato_core_Board__Lostinato_core_Rules__sci_Set.call(this, board, rules);
   var _3 = this.kingPiece__Lostinato_chess_core_ChessBoard__s_Option(board);
   if (_1) {
@@ -9584,6 +9598,17 @@ $c_ju_regex_Matcher.prototype.appendReplacement__jl_StringBuffer__T__ju_regex_Ma
   };
   this.appendPos$1 = this.end__I();
   return this
+});
+$c_ju_regex_Matcher.prototype.replaceFirst__T__T = (function(replacement) {
+  this.reset__ju_regex_Matcher();
+  if (this.find__Z()) {
+    var sb = new $c_jl_StringBuffer().init___();
+    this.appendReplacement__jl_StringBuffer__T__ju_regex_Matcher(sb, replacement);
+    this.appendTail__jl_StringBuffer__jl_StringBuffer(sb);
+    return sb.content$1
+  } else {
+    return this.inputstr$1
+  }
 });
 $c_ju_regex_Matcher.prototype.replaceAll__T__T = (function(replacement) {
   this.reset__ju_regex_Matcher();
@@ -10250,6 +10275,94 @@ $c_Ljava_io_OutputStream.prototype.close__V = (function() {
   /*<skip>*/
 });
 /** @constructor */
+function $c_Lostinato_chess_core_$u265A$() {
+  $c_O.call(this)
+}
+$c_Lostinato_chess_core_$u265A$.prototype = new $h_O();
+$c_Lostinato_chess_core_$u265A$.prototype.constructor = $c_Lostinato_chess_core_$u265A$;
+/** @constructor */
+function $h_Lostinato_chess_core_$u265A$() {
+  /*<skip>*/
+}
+$h_Lostinato_chess_core_$u265A$.prototype = $c_Lostinato_chess_core_$u265A$.prototype;
+$c_Lostinato_chess_core_$u265A$.prototype.initialY__Lostinato_chess_core_ChessPlayer__I__I = (function(owner, whitePawnDirection) {
+  matchEnd14: {
+    var jsx$1;
+    var x = $m_Lostinato_chess_core_WhiteChessPlayer$();
+    if ((x === owner)) {
+      if ((whitePawnDirection === 1)) {
+        var jsx$1 = true;
+        break matchEnd14
+      }
+    };
+    var x$3 = $m_Lostinato_chess_core_BlackChessPlayer$();
+    if ((x$3 === owner)) {
+      if ((whitePawnDirection === (-1))) {
+        var jsx$1 = true;
+        break matchEnd14
+      }
+    };
+    var jsx$1 = false;
+    break matchEnd14
+  };
+  if (jsx$1) {
+    return 0
+  } else {
+    return (((-1) + $m_Lostinato_chess_core_package$().chessBoardSize$1.y$1) | 0)
+  }
+});
+$c_Lostinato_chess_core_$u265A$.prototype.initialX__I__I = (function(whitePawnDirection) {
+  return ((whitePawnDirection === (-1)) ? 4 : 3)
+});
+$c_Lostinato_chess_core_$u265A$.prototype.rookDelta__Lostinato_core_XY__I__Lostinato_core_XY = (function(kingDelta, whitePawnDirection) {
+  var x1 = new $c_s_Tuple2$mcII$sp().init___I__I(kingDelta.x$1, whitePawnDirection);
+  var p2 = x1.$$und1$mcI$sp$f;
+  var p3 = x1.$$und2$mcI$sp$f;
+  if ((p2 === (-2))) {
+    if ((p3 === (-1))) {
+      return new $c_Lostinato_core_XY().init___I__I(3, 0)
+    }
+  };
+  var p4 = x1.$$und1$mcI$sp$f;
+  var p5 = x1.$$und2$mcI$sp$f;
+  if ((p4 === (-2))) {
+    if ((p5 === 1)) {
+      return new $c_Lostinato_core_XY().init___I__I(2, 0)
+    }
+  };
+  var p6 = x1.$$und1$mcI$sp$f;
+  var p7 = x1.$$und2$mcI$sp$f;
+  if ((p6 === 2)) {
+    if ((p7 === (-1))) {
+      return new $c_Lostinato_core_XY().init___I__I((-2), 0)
+    }
+  };
+  var p8 = x1.$$und1$mcI$sp$f;
+  var p9 = x1.$$und2$mcI$sp$f;
+  if ((p8 === 2)) {
+    if ((p9 === 1)) {
+      return new $c_Lostinato_core_XY().init___I__I((-3), 0)
+    }
+  };
+  throw new $c_s_MatchError().init___O(x1)
+});
+var $d_Lostinato_chess_core_$u265A$ = new $TypeData().initClass({
+  Lostinato_chess_core_$u265A$: 0
+}, false, "ostinato.chess.core.$u265A$", {
+  Lostinato_chess_core_$u265A$: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lostinato_chess_core_$u265A$.prototype.$classData = $d_Lostinato_chess_core_$u265A$;
+var $n_Lostinato_chess_core_$u265A$ = (void 0);
+function $m_Lostinato_chess_core_$u265A$() {
+  if ((!$n_Lostinato_chess_core_$u265A$)) {
+    $n_Lostinato_chess_core_$u265A$ = new $c_Lostinato_chess_core_$u265A$().init___()
+  };
+  return $n_Lostinato_chess_core_$u265A$
+}
+/** @constructor */
 function $c_Lostinato_chess_core_ChessGame$() {
   $c_O.call(this);
   this.defaultGame$1 = null
@@ -10321,7 +10434,7 @@ $c_Lostinato_chess_core_ChessGame$.prototype.fromString__T__Lostinato_chess_core
     $as_sci_VectorBuilder($s_scg_Growable$class__$$plus$plus$eq__scg_Growable__sc_TraversableOnce__scg_Growable(b, xs))
   };
   var enPassantPawns = b.result__sci_Vector();
-  return new $c_Lostinato_chess_core_ChessGame().init___Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I(grid, turn, $s_sc_TraversableLike$class__headOption__sc_TraversableLike__s_Option(enPassantPawns), castlingAvailable, fullMoveNumber, halfMoveClock), rules)
+  return new $c_Lostinato_chess_core_ChessGame().init___Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(grid, turn, $s_sc_TraversableLike$class__headOption__sc_TraversableLike__s_Option(enPassantPawns), castlingAvailable, fullMoveNumber, halfMoveClock, new $c_Lostinato_chess_core_package$PastBoards().init___sci_Map($as_sci_Map($m_s_Predef$().Map$2.apply__sc_Seq__sc_GenMap($m_sci_Nil$())))), rules)
 });
 var $d_Lostinato_chess_core_ChessGame$ = new $TypeData().initClass({
   Lostinato_chess_core_ChessGame$: 0
@@ -12800,6 +12913,46 @@ function $m_s_util_control_NoStackTrace$() {
   return $n_s_util_control_NoStackTrace$
 }
 /** @constructor */
+function $c_s_util_matching_Regex() {
+  $c_O.call(this);
+  this.pattern$1 = null;
+  this.scala$util$matching$Regex$$groupNames$f = null
+}
+$c_s_util_matching_Regex.prototype = new $h_O();
+$c_s_util_matching_Regex.prototype.constructor = $c_s_util_matching_Regex;
+/** @constructor */
+function $h_s_util_matching_Regex() {
+  /*<skip>*/
+}
+$h_s_util_matching_Regex.prototype = $c_s_util_matching_Regex.prototype;
+$c_s_util_matching_Regex.prototype.init___T__sc_Seq = (function(regex, groupNames) {
+  var this$1 = $m_ju_regex_Pattern$();
+  $c_s_util_matching_Regex.prototype.init___ju_regex_Pattern__sc_Seq.call(this, this$1.compile__T__I__ju_regex_Pattern(regex, 0), groupNames);
+  return this
+});
+$c_s_util_matching_Regex.prototype.init___ju_regex_Pattern__sc_Seq = (function(pattern, groupNames) {
+  this.pattern$1 = pattern;
+  this.scala$util$matching$Regex$$groupNames$f = groupNames;
+  return this
+});
+$c_s_util_matching_Regex.prototype.toString__T = (function() {
+  return this.pattern$1.$$undpattern$1
+});
+$c_s_util_matching_Regex.prototype.replaceFirstIn__jl_CharSequence__T__T = (function(target, replacement) {
+  var this$1 = this.pattern$1;
+  var m = new $c_ju_regex_Matcher().init___ju_regex_Pattern__jl_CharSequence__I__I(this$1, target, 0, $charSequenceLength(target));
+  return m.replaceFirst__T__T(replacement)
+});
+var $d_s_util_matching_Regex = new $TypeData().initClass({
+  s_util_matching_Regex: 0
+}, false, "scala.util.matching.Regex", {
+  s_util_matching_Regex: 1,
+  O: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_util_matching_Regex.prototype.$classData = $d_s_util_matching_Regex;
+/** @constructor */
 function $c_sc_IndexedSeq$$anon$1() {
   $c_scg_GenTraversableFactory$GenericCanBuildFrom.call(this)
 }
@@ -14838,18 +14991,20 @@ $c_Lostinato_chess_core_ChessBoard$$anonfun$betweenLocationsNotThreatenedBy$1$1.
   return this.player$1$f.pieces__Lostinato_core_Board__sci_Set(this.$$outer$2).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer, pos$2) {
     return (function(x$1$2) {
       var x$1 = $as_Lostinato_chess_core_ChessPiece(x$1$2);
-      var x$23 = arg$outer.player$1$f;
+      var x$30 = arg$outer.player$1$f;
       var this$1 = arg$outer.$$outer$2;
-      var x$24 = this$1.grid$1;
+      var x$31 = this$1.grid$1;
       var this$2 = arg$outer.$$outer$2;
-      var x$25 = this$2.enPassantPawn$2;
+      var x$32 = this$2.enPassantPawn$2;
       var this$3 = arg$outer.$$outer$2;
-      var x$26 = this$3.castlingAvailable$2;
+      var x$33 = this$3.castlingAvailable$2;
       var this$4 = arg$outer.$$outer$2;
-      var x$27 = this$4.fullMoveNumber$2;
+      var x$34 = this$4.fullMoveNumber$2;
       var this$5 = arg$outer.$$outer$2;
-      var x$28 = this$5.halfMoveClock$2;
-      return (!x$1.canMoveTo__Lostinato_core_XY__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(pos$2, new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I(x$24, x$23, x$25, x$26, x$27, x$28), arg$outer.rules$1$f))
+      var x$35 = this$5.halfMoveClock$2;
+      var this$6 = arg$outer.$$outer$2;
+      var x$36 = this$6.pastBoards$2;
+      return (!x$1.canMoveTo__Lostinato_core_XY__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(pos$2, new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(x$31, x$30, x$32, x$33, x$34, x$35, x$36), arg$outer.rules$1$f))
     })
   })(this, pos)))
 });
@@ -15612,6 +15767,113 @@ var $d_Lostinato_chess_core_package$IccfPos = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lostinato_chess_core_package$IccfPos.prototype.$classData = $d_Lostinato_chess_core_package$IccfPos;
+/** @constructor */
+function $c_Lostinato_chess_core_package$PastBoards() {
+  $c_O.call(this);
+  this.boards$1 = null;
+  this.isInThreefoldRepetition$1 = false;
+  this.isEmpty$1 = false;
+  this.bitmap$0$1 = false
+}
+$c_Lostinato_chess_core_package$PastBoards.prototype = new $h_O();
+$c_Lostinato_chess_core_package$PastBoards.prototype.constructor = $c_Lostinato_chess_core_package$PastBoards;
+/** @constructor */
+function $h_Lostinato_chess_core_package$PastBoards() {
+  /*<skip>*/
+}
+$h_Lostinato_chess_core_package$PastBoards.prototype = $c_Lostinato_chess_core_package$PastBoards.prototype;
+$c_Lostinato_chess_core_package$PastBoards.prototype.productPrefix__T = (function() {
+  return "PastBoards"
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.productArity__I = (function() {
+  return 1
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else if ($is_Lostinato_chess_core_package$PastBoards(x$1)) {
+    var PastBoards$1 = $as_Lostinato_chess_core_package$PastBoards(x$1);
+    var x = this.boards$1;
+    var x$2 = PastBoards$1.boards$1;
+    return ((x === null) ? (x$2 === null) : $s_sc_GenMapLike$class__equals__sc_GenMapLike__O__Z(x, x$2))
+  } else {
+    return false
+  }
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.productElement__I__O = (function(x$1) {
+  switch (x$1) {
+    case 0: {
+      return this.boards$1;
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+    }
+  }
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.serialiseBoard__Lostinato_chess_core_ChessBoard__T = (function(board) {
+  var this$2 = new $c_sci_StringOps().init___T("^([^ ]+ +[^ ]+ +[^ ]+ +[^ ]+).*$");
+  var groupNames = $m_sci_Nil$();
+  return new $c_s_util_matching_Regex().init___T__sc_Seq(this$2.repr$1, groupNames).replaceFirstIn__jl_CharSequence__T__T(board.toFen__T(), "$1")
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.init___sci_Map = (function(boards) {
+  this.boards$1 = boards;
+  this.isEmpty$1 = boards.isEmpty__Z();
+  return this
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.withBoard__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards = (function(board) {
+  var serialisedBoard = this.serialiseBoard__Lostinato_chess_core_ChessBoard__T(board);
+  var this$1 = this.boards$1.get__O__s_Option(serialisedBoard);
+  if (this$1.isDefined__Z()) {
+    return new $c_Lostinato_chess_core_package$PastBoards().init___sci_Map(this.boards$1.updated__O__O__sci_Map(serialisedBoard, ((1 + $uI(this.boards$1.apply__O__O(serialisedBoard))) | 0)))
+  } else {
+    var jsx$1 = this.boards$1;
+    var array = [new $c_T2().init___O__O(serialisedBoard, 1)];
+    var this$5 = new $c_scm_MapBuilder().init___sc_GenMap($m_sci_Map$EmptyMap$());
+    var i = 0;
+    var len = $uI(array["length"]);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      this$5.$$plus$eq__T2__scm_MapBuilder($as_T2(arg1));
+      i = ((1 + i) | 0)
+    };
+    return new $c_Lostinato_chess_core_package$PastBoards().init___sci_Map(jsx$1.$$plus$plus__sc_GenTraversableOnce__sci_Map(this$5.elems$1))
+  }
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__I(this, (-889275714))
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+function $is_Lostinato_chess_core_package$PastBoards(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lostinato_chess_core_package$PastBoards)))
+}
+function $as_Lostinato_chess_core_package$PastBoards(obj) {
+  return (($is_Lostinato_chess_core_package$PastBoards(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "ostinato.chess.core.package$PastBoards"))
+}
+function $isArrayOf_Lostinato_chess_core_package$PastBoards(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lostinato_chess_core_package$PastBoards)))
+}
+function $asArrayOf_Lostinato_chess_core_package$PastBoards(obj, depth) {
+  return (($isArrayOf_Lostinato_chess_core_package$PastBoards(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lostinato.chess.core.package$PastBoards;", depth))
+}
+var $d_Lostinato_chess_core_package$PastBoards = new $TypeData().initClass({
+  Lostinato_chess_core_package$PastBoards: 0
+}, false, "ostinato.chess.core.package$PastBoards", {
+  Lostinato_chess_core_package$PastBoards: 1,
+  O: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lostinato_chess_core_package$PastBoards.prototype.$classData = $d_Lostinato_chess_core_package$PastBoards;
 /** @constructor */
 function $c_Lostinato_core_BoardSize() {
   $c_O.call(this);
@@ -18486,7 +18748,8 @@ function $c_Lostinato_chess_core_ChessBoard() {
   this.enPassantPawn$2 = null;
   this.castlingAvailable$2 = null;
   this.fullMoveNumber$2 = 0;
-  this.halfMoveClock$2 = 0
+  this.halfMoveClock$2 = 0;
+  this.pastBoards$2 = null
 }
 $c_Lostinato_chess_core_ChessBoard.prototype = new $h_Lostinato_core_Board();
 $c_Lostinato_chess_core_ChessBoard.prototype.constructor = $c_Lostinato_chess_core_ChessBoard;
@@ -18530,7 +18793,7 @@ $c_Lostinato_chess_core_ChessBoard.prototype.simpleInsufficientMaterial__p2__Z =
 $c_Lostinato_chess_core_ChessBoard.prototype.doAction__Lostinato_chess_core_ChessAction__Lostinato_chess_core_ChessRules__s_Option = (function(a, rules) {
   var _2 = this.get__Lostinato_core_XY__Lostinato_core_BoardSize__s_Option(a.fromPiece__Lostinato_chess_core_ChessPiece().pos__Lostinato_core_XY(), $m_Lostinato_chess_core_package$().chessBoardSize$1);
   if ($is_Lostinato_chess_core_FinalAction(a)) {
-    return new $c_s_Some().init___O(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I(this.grid$1, this.turn$2, $m_s_None$(), $m_Lostinato_chess_core_package$().castlingFullyUnavailable__sci_Map(), this.fullMoveNumber$2, 0))
+    return new $c_s_Some().init___O(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(this.grid$1, this.turn$2, $m_s_None$(), $m_Lostinato_chess_core_package$().castlingFullyUnavailable__sci_Map(), this.fullMoveNumber$2, 0, new $c_Lostinato_chess_core_package$PastBoards().init___sci_Map($as_sci_Map($m_s_Predef$().Map$2.apply__sc_Seq__sc_GenMap($m_sci_Nil$())))))
   };
   if ($is_s_Some(_2)) {
     var x5 = $as_s_Some(_2);
@@ -18543,10 +18806,10 @@ $c_Lostinato_chess_core_ChessBoard.prototype.doAction__Lostinato_chess_core_Ches
         var x$3 = a.fromPiece__Lostinato_chess_core_ChessPiece().owner__Lostinato_core_Player();
         var x$4 = this.turn$2;
         if ((x$3 === x$4)) {
-          var this$1 = a.gridUpdates__sci_List();
+          var this$3 = a.gridUpdates__sci_List();
           var z = this.grid$1;
           var acc = z;
-          var these = this$1;
+          var these = this$3;
           while ((!these.isEmpty__Z())) {
             var arg1 = acc;
             var arg2 = these.head__O();
@@ -18561,7 +18824,15 @@ $c_Lostinato_chess_core_ChessBoard.prototype.doAction__Lostinato_chess_core_Ches
           var jsx$1 = this.calculateCastlingAvailable$1__p2__Lostinato_chess_core_ChessAction__sci_Map(a);
           var x$5 = this.turn$2;
           var x$6 = $m_Lostinato_chess_core_BlackChessPlayer$();
-          return new $c_s_Some().init___O(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I(jsx$4, jsx$3, jsx$2, jsx$1, (((x$5 !== null) && (x$5 === x$6)) ? ((1 + this.fullMoveNumber$2) | 0) : this.fullMoveNumber$2), this.calculateHalfMoveClock$1__p2__Lostinato_chess_core_ChessAction__I(a)))
+          var newBoard = new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(jsx$4, jsx$3, jsx$2, jsx$1, (((x$5 !== null) && (x$5 === x$6)) ? ((1 + this.fullMoveNumber$2) | 0) : this.fullMoveNumber$2), this.calculateHalfMoveClock$1__p2__Lostinato_chess_core_ChessAction__I(a), new $c_Lostinato_chess_core_package$PastBoards().init___sci_Map($as_sci_Map($m_s_Predef$().Map$2.apply__sc_Seq__sc_GenMap($m_sci_Nil$()))));
+          var x$23 = this.calculatePastBoards$1__p2__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards(newBoard);
+          var x$24 = newBoard.grid$1;
+          var x$25 = newBoard.turn$2;
+          var x$26 = newBoard.enPassantPawn$2;
+          var x$27 = newBoard.castlingAvailable$2;
+          var x$28 = newBoard.fullMoveNumber$2;
+          var x$29 = newBoard.halfMoveClock$2;
+          return new $c_s_Some().init___O(new $c_Lostinato_chess_core_ChessBoard().init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards(x$24, x$25, x$26, x$27, x$28, x$29, x$23))
         }
       }
     }
@@ -18571,6 +18842,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.doAction__Lostinato_chess_core_Ches
 $c_Lostinato_chess_core_ChessBoard.prototype.productPrefix__T = (function() {
   return "ChessBoard"
 });
+$c_Lostinato_chess_core_ChessBoard.prototype.calculatePastBoards$1__p2__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards = (function(newBoard) {
+  return (this.pastBoards$2.isEmpty$1 ? this.pastBoards$2.withBoard__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards(this).withBoard__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards(newBoard) : this.pastBoards$2.withBoard__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_package$PastBoards(newBoard))
+});
 $c_Lostinato_chess_core_ChessBoard.prototype.calculateCastlingAvailable$1__p2__Lostinato_chess_core_ChessAction__sci_Map = (function(a$1) {
   return ($is_Lostinato_chess_core_CastlingAction(a$1) ? this.castlingAvailable$2.updated__O__O__sci_Map(new $c_T2().init___O__O(this.turn$2, $m_Lostinato_chess_core_package$CastlingSide$().Queenside$2), false).updated__O__O__sci_Map(new $c_T2().init___O__O(this.turn$2, $m_Lostinato_chess_core_package$CastlingSide$().Kingside$2), false) : this.castlingAvailable$2)
 });
@@ -18578,7 +18852,7 @@ $c_Lostinato_chess_core_ChessBoard.prototype.isDrawFor__Lostinato_chess_core_Che
   return (player.nonFinalActions__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__sci_Set(this, rules).isEmpty__Z() && (!this.isLossFor__Lostinato_chess_core_ChessPlayer__Lostinato_chess_core_ChessRules__Z(player, rules)))
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.productArity__I = (function() {
-  return 6
+  return 7
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.kingsBishopsInsufficientMaterial__p2__Z = (function() {
   var this$2 = this.pieces__sci_Vector();
@@ -18627,36 +18901,34 @@ $c_Lostinato_chess_core_ChessBoard.prototype.calculateEnPassants$1__p2__Lostinat
     return $m_s_None$()
   }
 });
-$c_Lostinato_chess_core_ChessBoard.prototype.equals__O__Z = (function(x$1) {
-  if ((this === x$1)) {
-    return true
-  } else if ($is_Lostinato_chess_core_ChessBoard(x$1)) {
-    var ChessBoard$1 = $as_Lostinato_chess_core_ChessBoard(x$1);
-    var x = this.grid$1;
-    var x$2 = ChessBoard$1.grid$1;
+$c_Lostinato_chess_core_ChessBoard.prototype.equals__O__Z = (function(any) {
+  if ($is_Lostinato_chess_core_ChessBoard(any)) {
+    var x2 = $as_Lostinato_chess_core_ChessBoard(any);
+    var x = x2.grid$1;
+    var x$2 = this.grid$1;
     if (((x === null) ? (x$2 === null) : $s_sc_GenSeqLike$class__equals__sc_GenSeqLike__O__Z(x, x$2))) {
-      var x$3 = this.turn$2;
-      var x$4 = ChessBoard$1.turn$2;
+      var x$3 = x2.turn$2;
+      var x$4 = this.turn$2;
       var jsx$3 = (x$3 === x$4)
     } else {
       var jsx$3 = false
     };
     if (jsx$3) {
-      var x$5 = this.enPassantPawn$2;
-      var x$6 = ChessBoard$1.enPassantPawn$2;
-      var jsx$2 = ((x$5 === null) ? (x$6 === null) : x$5.equals__O__Z(x$6))
+      var x$5 = x2.castlingAvailable$2;
+      var x$6 = this.castlingAvailable$2;
+      var jsx$2 = ((x$5 === null) ? (x$6 === null) : $s_sc_GenMapLike$class__equals__sc_GenMapLike__O__Z(x$5, x$6))
     } else {
       var jsx$2 = false
     };
     if (jsx$2) {
-      var x$7 = this.castlingAvailable$2;
-      var x$8 = ChessBoard$1.castlingAvailable$2;
-      var jsx$1 = ((x$7 === null) ? (x$8 === null) : $s_sc_GenMapLike$class__equals__sc_GenMapLike__O__Z(x$7, x$8))
+      var x$7 = x2.enPassantPawn$2;
+      var x$8 = this.enPassantPawn$2;
+      var jsx$1 = ((x$7 === null) ? (x$8 === null) : x$7.equals__O__Z(x$8))
     } else {
       var jsx$1 = false
     };
-    if ((jsx$1 && (this.fullMoveNumber$2 === ChessBoard$1.fullMoveNumber$2))) {
-      return (this.halfMoveClock$2 === ChessBoard$1.halfMoveClock$2)
+    if ((jsx$1 && (x2.fullMoveNumber$2 === this.fullMoveNumber$2))) {
+      return (x2.halfMoveClock$2 === this.halfMoveClock$2)
     } else {
       return false
     }
@@ -18709,19 +18981,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.productElement__I__O = (function(x$
       return this.halfMoveClock$2;
       break
     }
+    case 6: {
+      return this.pastBoards$2;
+      break
+    }
     default: {
       throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
     }
   }
-});
-$c_Lostinato_chess_core_ChessBoard.prototype.init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I = (function(grid, turn, enPassantPawn, castlingAvailable, fullMoveNumber, halfMoveClock) {
-  this.turn$2 = turn;
-  this.enPassantPawn$2 = enPassantPawn;
-  this.castlingAvailable$2 = castlingAvailable;
-  this.fullMoveNumber$2 = fullMoveNumber;
-  this.halfMoveClock$2 = halfMoveClock;
-  $c_Lostinato_core_Board.prototype.init___sci_Vector.call(this, grid);
-  return this
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.toString__T = (function() {
   var this$1 = this.grid$1;
@@ -18783,6 +19050,16 @@ $c_Lostinato_chess_core_ChessBoard.prototype.bishops__sci_Vector = (function() {
     }
   };
   return b.result__sci_Vector()
+});
+$c_Lostinato_chess_core_ChessBoard.prototype.init___sci_Vector__Lostinato_chess_core_ChessPlayer__s_Option__sci_Map__I__I__Lostinato_chess_core_package$PastBoards = (function(grid, turn, enPassantPawn, castlingAvailable, fullMoveNumber, halfMoveClock, pastBoards) {
+  this.turn$2 = turn;
+  this.enPassantPawn$2 = enPassantPawn;
+  this.castlingAvailable$2 = castlingAvailable;
+  this.fullMoveNumber$2 = fullMoveNumber;
+  this.halfMoveClock$2 = halfMoveClock;
+  this.pastBoards$2 = pastBoards;
+  $c_Lostinato_core_Board.prototype.init___sci_Vector.call(this, grid);
+  return this
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.targetRook$1__p2__Lostinato_chess_core_$u265A__Lostinato_core_XY__Lostinato_chess_core_ChessRules__s_Option = (function(k, delta$1, rules$1) {
   var x1 = this.get__Lostinato_core_XY__Lostinato_core_BoardSize__s_Option(k.targetRookPosition__I__Lostinato_chess_core_ChessRules__Lostinato_core_XY(delta$1.x$1, rules$1), $m_Lostinato_chess_core_package$().chessBoardSize$1);
@@ -18851,17 +19128,17 @@ $c_Lostinato_chess_core_ChessBoard.prototype.grid__sci_Vector = (function() {
 $c_Lostinato_chess_core_ChessBoard.prototype.ostinato$chess$core$ChessBoard$$allNewBoards$1__Lostinato_chess_core_ChessPlayer__Lostinato_chess_core_ChessRules__Lostinato_chess_core_ChessRules__sr_ObjectRef__sr_VolatileByteRef__sci_Set = (function(player$2, rules$2, noCheckForMates$1, allNewBoards$lzy$1, bitmap$0$3) {
   return (((1 & bitmap$0$3.elem$1) === 0) ? this.allNewBoards$lzycompute$1__p2__Lostinato_chess_core_ChessPlayer__Lostinato_chess_core_ChessRules__Lostinato_chess_core_ChessRules__sr_ObjectRef__sr_VolatileByteRef__sci_Set(player$2, rules$2, noCheckForMates$1, allNewBoards$lzy$1, bitmap$0$3) : $as_sci_Set(allNewBoards$lzy$1.elem$1))
 });
-$c_Lostinato_chess_core_ChessBoard.prototype.insufficientMaterial__Z = (function() {
+$c_Lostinato_chess_core_ChessBoard.prototype.hasInsufficientMaterial__Z = (function() {
   return (this.simpleInsufficientMaterial__p2__Z() || this.kingsBishopsInsufficientMaterial__p2__Z())
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.isLossFor__Lostinato_chess_core_ChessPlayer__Lostinato_chess_core_ChessRules__Z = (function(player, rules) {
   var allNewBoards$lzy = new $c_sr_ObjectRef().init___O(null);
   var bitmap$0 = new $c_sr_VolatileByteRef().init___B(0);
-  var x$30 = rules.whitePawnDirection$2;
-  var x$31 = rules.kingIsTakeable$2;
-  var x$32 = rules.allowImpossibleBoards$2;
-  var x$33 = rules.noKingMeansLoss$2;
-  var noCheckForMates = new $c_Lostinato_chess_core_ChessRules().init___I__Z__Z__Z__Z(x$30, x$31, x$32, x$33, false);
+  var x$38 = rules.whitePawnDirection$2;
+  var x$39 = rules.kingIsTakeable$2;
+  var x$40 = rules.allowImpossibleBoards$2;
+  var x$41 = rules.noKingMeansLoss$2;
+  var noCheckForMates = new $c_Lostinato_chess_core_ChessRules().init___I__Z__Z__Z__Z(x$38, x$39, x$40, x$41, false);
   var this$3 = player.kingPiece__Lostinato_chess_core_ChessBoard__s_Option(this);
   var f = new $c_Lostinato_chess_core_ChessBoard$$anonfun$isLossFor$2().init___Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessPlayer__Lostinato_chess_core_ChessRules__Lostinato_chess_core_ChessRules__sr_ObjectRef__sr_VolatileByteRef(this, player, rules, noCheckForMates, allNewBoards$lzy, bitmap$0);
   if (this$3.isEmpty__Z()) {
@@ -18880,18 +19157,17 @@ $c_Lostinato_chess_core_ChessBoard.prototype.hashCode__I = (function() {
   acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.castlingAvailable$2));
   acc = $m_sr_Statics$().mix__I__I__I(acc, this.fullMoveNumber$2);
   acc = $m_sr_Statics$().mix__I__I__I(acc, this.halfMoveClock$2);
-  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 6)
+  acc = $m_sr_Statics$().mix__I__I__I(acc, $m_sr_Statics$().anyHash__O__I(this.pastBoards$2));
+  return $m_sr_Statics$().finalizeHash__I__I__I(acc, 7)
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.productIterator__sc_Iterator = (function() {
   return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY__Lostinato_core_XY__Lostinato_chess_core_ChessRules__sci_Set = (function(from, delta, rules) {
-  var elem$1 = false;
-  elem$1 = false;
-  var elem$1$1 = null;
-  elem$1$1 = null;
-  var elem$1$2 = 0;
-  elem$1$2 = 0;
+  var elem$1 = null;
+  elem$1 = null;
+  var elem$1$1 = 0;
+  elem$1$1 = 0;
   var to = from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta);
   var fromPiece = this.get__Lostinato_core_XY__Lostinato_core_BoardSize__s_Option(from, $m_Lostinato_chess_core_package$().chessBoardSize$1);
   var toPiece = this.get__Lostinato_core_XY__Lostinato_core_BoardSize__s_Option(to, $m_Lostinato_chess_core_package$().chessBoardSize$1);
@@ -18903,8 +19179,8 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
       var p = $as_Lostinato_chess_core_ChessPiece(x4.x$2);
       if ((p !== null)) {
         if (p.deltas__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__sci_Set(this, rules).contains__O__Z(delta)) {
-          if (((2 & elem$1$2) === 0)) {
-            if (((2 & elem$1$2) === 0)) {
+          if (((1 & elem$1$1) === 0)) {
+            if (((1 & elem$1$1) === 0)) {
               var _3 = this.enPassantPawn$2;
               matchEnd95: {
                 if ($is_s_Some(fromPiece)) {
@@ -18925,8 +19201,8 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                             var epp = $as_Lostinato_chess_core_EnPassantPawn(x10.x$2);
                             if ((epp !== null)) {
                               if (((delta.x$1 !== 0) && this.isEnPassantPawn$1__p2__Lostinato_core_XY__Z(to))) {
-                                var this$4 = epp.pawn$1;
-                                var x$3 = $as_Lostinato_chess_core_ChessPlayer(this$4.owner$1);
+                                var this$3 = epp.pawn$1;
+                                var x$3 = $as_Lostinato_chess_core_ChessPlayer(this$3.owner$1);
                                 var x$4 = $as_Lostinato_chess_core_ChessPlayer(x76.owner$1);
                                 var jsx$1 = (!(x$3 === x$4))
                               } else {
@@ -18948,7 +19224,7 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                   };
                                   var jsx$2 = b.elems$1
                                 };
-                                elem$1$1 = $as_sci_Set(jsx$2);
+                                elem$1 = $as_sci_Set(jsx$2);
                                 break matchEnd95
                               }
                             }
@@ -18973,32 +19249,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                         if ((x$5 === p18)) {
                           if ((delta.x$1 === 0)) {
                             var x$1 = delta.y$1;
-                            var jsx$4 = (((x$1 < 0) ? ((-x$1) | 0) : x$1) === 2)
-                          } else {
-                            var jsx$4 = false
-                          };
-                          if (jsx$4) {
-                            if (((1 & elem$1$2) === 0)) {
-                              if (((1 & elem$1$2) === 0)) {
-                                elem$1 = this.between__Lostinato_core_XY__Lostinato_core_XY__Lostinato_core_BoardSize__sci_Set(from, to, $m_Lostinato_chess_core_package$().chessBoardSize$1).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer) {
-                                  return (function(l$2) {
-                                    var l = $as_s_Option(l$2);
-                                    return arg$outer.isEmptyCell__s_Option__Z(l)
-                                  })
-                                })(this)));
-                                elem$1$2 = (1 | elem$1$2)
-                              };
-                              var jsx$3 = elem$1
-                            } else {
-                              var jsx$3 = elem$1
-                            }
+                            var jsx$3 = (((x$1 < 0) ? ((-x$1) | 0) : x$1) === 2)
                           } else {
                             var jsx$3 = false
                           };
-                          if (jsx$3) {
+                          if ((jsx$3 && this.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z(from, to))) {
                             var array$1 = [new $c_Lostinato_chess_core_EnPassantActionFactory().init___Lostinato_chess_core_$u265F__Lostinato_core_XY(x79, delta)];
                             if (($uI(array$1["length"]) === 0)) {
-                              var jsx$5 = $m_sci_Set$EmptySet$()
+                              var jsx$4 = $m_sci_Set$EmptySet$()
                             } else {
                               var b$1 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                               var i$1 = 0;
@@ -19009,9 +19267,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                 b$1.$$plus$eq__O__scm_SetBuilder(arg1$1);
                                 i$1 = ((1 + i$1) | 0)
                               };
-                              var jsx$5 = b$1.elems$1
+                              var jsx$4 = b$1.elems$1
                             };
-                            elem$1$1 = $as_sci_Set(jsx$5);
+                            elem$1 = $as_sci_Set(jsx$4);
                             break matchEnd95
                           }
                         }
@@ -19037,14 +19295,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                             if (((delta.x$1 !== 0) && ((!toP.isKing__Z()) || rules.kingIsTakeable$2))) {
                               var x$7 = toP.owner__Lostinato_core_Player();
                               var x$8 = $as_Lostinato_chess_core_ChessPlayer(x81.owner$1);
-                              var jsx$6 = (!(x$7 === x$8))
+                              var jsx$5 = (!(x$7 === x$8))
                             } else {
-                              var jsx$6 = false
+                              var jsx$5 = false
                             };
-                            if ((jsx$6 && (to.y$1 === x81.promotingPosition__I__Lostinato_core_BoardSize__I(delta.y$1, $m_Lostinato_chess_core_package$().chessBoardSize$1)))) {
+                            if ((jsx$5 && (to.y$1 === x81.promotingPosition__I__Lostinato_core_BoardSize__I(delta.y$1, $m_Lostinato_chess_core_package$().chessBoardSize$1)))) {
                               var array$2 = [new $c_Lostinato_chess_core_$u265C().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x81.owner$1)), new $c_Lostinato_chess_core_$u265D().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x81.owner$1)), new $c_Lostinato_chess_core_$u265E().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x81.owner$1)), new $c_Lostinato_chess_core_$u265B().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x81.owner$1))];
                               if (($uI(array$2["length"]) === 0)) {
-                                var jsx$7 = $m_sci_Set$EmptySet$()
+                                var jsx$6 = $m_sci_Set$EmptySet$()
                               } else {
                                 var b$2 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                                 var i$2 = 0;
@@ -19055,18 +19313,18 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                   b$2.$$plus$eq__O__scm_SetBuilder(arg1$2);
                                   i$2 = ((1 + i$2) | 0)
                                 };
-                                var jsx$7 = b$2.elems$1
+                                var jsx$6 = b$2.elems$1
                               };
-                              var this$11 = $as_sc_SetLike(jsx$7);
+                              var this$10 = $as_sc_SetLike(jsx$6);
                               var f = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(delta$1, x81$1, x82$1) {
                                 return (function(x$2$2) {
                                   var x$2 = $as_Lostinato_chess_core_ChessPiece(x$2$2);
                                   return new $c_Lostinato_chess_core_CapturePromoteActionFactory().init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY__Lostinato_chess_core_ChessPiece__Lostinato_chess_core_ChessPiece(x81$1, delta$1, x82$1, x$2)
                                 })
                               })(delta, x81, toP));
-                              var this$10 = $m_sci_Set$();
-                              var bf = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$10);
-                              elem$1$1 = $as_sci_Set($s_sc_TraversableLike$class__map__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$11, f, bf));
+                              var this$9 = $m_sci_Set$();
+                              var bf = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$9);
+                              elem$1 = $as_sci_Set($s_sc_TraversableLike$class__map__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$10, f, bf));
                               break matchEnd95
                             }
                           }
@@ -19090,14 +19348,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                         if ((x$9 === p35)) {
                           if ((delta.x$1 === 0)) {
                             var x$6 = delta.y$1;
-                            var jsx$8 = (((x$6 < 0) ? ((-x$6) | 0) : x$6) === 1)
+                            var jsx$7 = (((x$6 < 0) ? ((-x$6) | 0) : x$6) === 1)
                           } else {
-                            var jsx$8 = false
+                            var jsx$7 = false
                           };
-                          if ((jsx$8 && (to.y$1 === x83.promotingPosition__I__Lostinato_core_BoardSize__I(delta.y$1, $m_Lostinato_chess_core_package$().chessBoardSize$1)))) {
+                          if ((jsx$7 && (to.y$1 === x83.promotingPosition__I__Lostinato_core_BoardSize__I(delta.y$1, $m_Lostinato_chess_core_package$().chessBoardSize$1)))) {
                             var array$3 = [new $c_Lostinato_chess_core_$u265C().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x83.owner$1)), new $c_Lostinato_chess_core_$u265D().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x83.owner$1)), new $c_Lostinato_chess_core_$u265E().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x83.owner$1)), new $c_Lostinato_chess_core_$u265B().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(from.$$plus__Lostinato_core_XY__Lostinato_core_XY(delta), $as_Lostinato_chess_core_ChessPlayer(x83.owner$1))];
                             if (($uI(array$3["length"]) === 0)) {
-                              var jsx$9 = $m_sci_Set$EmptySet$()
+                              var jsx$8 = $m_sci_Set$EmptySet$()
                             } else {
                               var b$3 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                               var i$3 = 0;
@@ -19108,18 +19366,18 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                 b$3.$$plus$eq__O__scm_SetBuilder(arg1$3);
                                 i$3 = ((1 + i$3) | 0)
                               };
-                              var jsx$9 = b$3.elems$1
+                              var jsx$8 = b$3.elems$1
                             };
-                            var this$16 = $as_sc_SetLike(jsx$9);
+                            var this$15 = $as_sc_SetLike(jsx$8);
                             var f$1 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(delta$1$1, x83$1) {
                               return (function(x$3$2) {
                                 var x$3$1 = $as_Lostinato_chess_core_ChessPiece(x$3$2);
                                 return new $c_Lostinato_chess_core_PromoteActionFactory().init___Lostinato_chess_core_$u265F__Lostinato_core_XY__Lostinato_chess_core_ChessPiece(x83$1, delta$1$1, x$3$1)
                               })
                             })(delta, x83));
-                            var this$15 = $m_sci_Set$();
-                            var bf$1 = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$15);
-                            elem$1$1 = $as_sci_Set($s_sc_TraversableLike$class__map__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$16, f$1, bf$1));
+                            var this$14 = $m_sci_Set$();
+                            var bf$1 = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$14);
+                            elem$1 = $as_sci_Set($s_sc_TraversableLike$class__map__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$15, f$1, bf$1));
                             break matchEnd95
                           }
                         }
@@ -19142,14 +19400,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                         if ((x$11 === p43)) {
                           if ((delta.x$1 === 0)) {
                             var x$10 = delta.y$1;
-                            var jsx$10 = (((x$10 < 0) ? ((-x$10) | 0) : x$10) === 1)
+                            var jsx$9 = (((x$10 < 0) ? ((-x$10) | 0) : x$10) === 1)
                           } else {
-                            var jsx$10 = false
+                            var jsx$9 = false
                           };
-                          if (jsx$10) {
+                          if (jsx$9) {
                             var array$4 = [new $c_Lostinato_chess_core_MoveActionFactory().init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY(x85, delta)];
                             if (($uI(array$4["length"]) === 0)) {
-                              var jsx$11 = $m_sci_Set$EmptySet$()
+                              var jsx$10 = $m_sci_Set$EmptySet$()
                             } else {
                               var b$4 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                               var i$4 = 0;
@@ -19160,9 +19418,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                 b$4.$$plus$eq__O__scm_SetBuilder(arg1$4);
                                 i$4 = ((1 + i$4) | 0)
                               };
-                              var jsx$11 = b$4.elems$1
+                              var jsx$10 = b$4.elems$1
                             };
-                            elem$1$1 = $as_sci_Set(jsx$11);
+                            elem$1 = $as_sci_Set(jsx$10);
                             break matchEnd95
                           }
                         }
@@ -19188,14 +19446,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                             if (((delta.x$1 !== 0) && ((!toP$2.isKing__Z()) || rules.kingIsTakeable$2))) {
                               var x$13 = toP$2.owner__Lostinato_core_Player();
                               var x$14 = $as_Lostinato_chess_core_ChessPlayer(x87.owner$1);
-                              var jsx$12 = (!(x$13 === x$14))
+                              var jsx$11 = (!(x$13 === x$14))
                             } else {
-                              var jsx$12 = false
+                              var jsx$11 = false
                             };
-                            if (jsx$12) {
+                            if (jsx$11) {
                               var array$5 = [new $c_Lostinato_chess_core_CaptureActionFactory().init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY__Lostinato_chess_core_ChessPiece(x87, delta, toP$2)];
                               if (($uI(array$5["length"]) === 0)) {
-                                var jsx$13 = $m_sci_Set$EmptySet$()
+                                var jsx$12 = $m_sci_Set$EmptySet$()
                               } else {
                                 var b$5 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                                 var i$5 = 0;
@@ -19206,9 +19464,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                   b$5.$$plus$eq__O__scm_SetBuilder(arg1$5);
                                   i$5 = ((1 + i$5) | 0)
                                 };
-                                var jsx$13 = b$5.elems$1
+                                var jsx$12 = b$5.elems$1
                               };
-                              elem$1$1 = $as_sci_Set(jsx$13);
+                              elem$1 = $as_sci_Set(jsx$12);
                               break matchEnd95
                             }
                           }
@@ -19244,28 +19502,10 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                     var x9 = $as_s_Some(p8);
                                     var cs = $as_s_Enumeration$Value(x9.x$2);
                                     if ((cs !== null)) {
-                                      if ((x89.isInInitialPosition__Lostinato_chess_core_ChessRules__Z(rules) && $uZ(this.castlingAvailable$2.apply__O__O(new $c_T2().init___O__O($as_Lostinato_chess_core_ChessPlayer(x89.owner$1), cs))))) {
-                                        if (((1 & elem$1$2) === 0)) {
-                                          if (((1 & elem$1$2) === 0)) {
-                                            elem$1 = this.between__Lostinato_core_XY__Lostinato_core_XY__Lostinato_core_BoardSize__sci_Set(from, to, $m_Lostinato_chess_core_package$().chessBoardSize$1).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer$1) {
-                                              return (function(l$2$1) {
-                                                var l$1 = $as_s_Option(l$2$1);
-                                                return arg$outer$1.isEmptyCell__s_Option__Z(l$1)
-                                              })
-                                            })(this)));
-                                            elem$1$2 = (1 | elem$1$2)
-                                          };
-                                          var jsx$14 = elem$1
-                                        } else {
-                                          var jsx$14 = elem$1
-                                        }
-                                      } else {
-                                        var jsx$14 = false
-                                      };
-                                      if (((jsx$14 && (!x89.isThreatened__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(this, rules))) && this.betweenLocationsNotThreatenedBy$1__p2__Lostinato_chess_core_ChessPlayer__Lostinato_core_XY__Lostinato_chess_core_ChessRules__Lostinato_core_XY__Z($as_Lostinato_chess_core_ChessPlayer(x89.owner$1).enemy__Lostinato_chess_core_ChessPlayer(), from, rules, to))) {
-                                        var array$6 = [new $c_Lostinato_chess_core_CastlingActionFactory().init___Lostinato_chess_core_$u265A__Lostinato_core_XY__Lostinato_chess_core_$u265C__Lostinato_core_XY(x89, delta, r, x89.rookDeltaFor__Lostinato_core_XY__Lostinato_core_XY(delta))];
+                                      if ((((((x89.isInInitialPosition__Lostinato_chess_core_ChessRules__Z(rules) && $uZ(this.castlingAvailable$2.apply__O__O(new $c_T2().init___O__O($as_Lostinato_chess_core_ChessPlayer(x89.owner$1), cs)))) && this.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z(from, to)) && this.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z(r.pos$1, r.pos$1.$$plus__Lostinato_core_XY__Lostinato_core_XY($m_Lostinato_chess_core_$u265A$().rookDelta__Lostinato_core_XY__I__Lostinato_core_XY(delta, rules.whitePawnDirection$2)))) && (!x89.isThreatened__Lostinato_chess_core_ChessBoard__Lostinato_chess_core_ChessRules__Z(this, rules))) && this.betweenLocationsNotThreatenedBy$1__p2__Lostinato_chess_core_ChessPlayer__Lostinato_core_XY__Lostinato_chess_core_ChessRules__Lostinato_core_XY__Z($as_Lostinato_chess_core_ChessPlayer(x89.owner$1).enemy__Lostinato_chess_core_ChessPlayer(), from, rules, to))) {
+                                        var array$6 = [new $c_Lostinato_chess_core_CastlingActionFactory().init___Lostinato_chess_core_$u265A__Lostinato_core_XY__Lostinato_chess_core_$u265C__Lostinato_core_XY(x89, delta, r, $m_Lostinato_chess_core_$u265A$().rookDelta__Lostinato_core_XY__I__Lostinato_core_XY(delta, rules.whitePawnDirection$2))];
                                         if (($uI(array$6["length"]) === 0)) {
-                                          var jsx$15 = $m_sci_Set$EmptySet$()
+                                          var jsx$13 = $m_sci_Set$EmptySet$()
                                         } else {
                                           var b$6 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                                           var i$6 = 0;
@@ -19276,9 +19516,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                             b$6.$$plus$eq__O__scm_SetBuilder(arg1$6);
                                             i$6 = ((1 + i$6) | 0)
                                           };
-                                          var jsx$15 = b$6.elems$1
+                                          var jsx$13 = b$6.elems$1
                                         };
-                                        elem$1$1 = $as_sci_Set(jsx$15);
+                                        elem$1 = $as_sci_Set(jsx$13);
                                         break matchEnd95
                                       }
                                     }
@@ -19288,7 +19528,7 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                             }
                           }
                         };
-                        elem$1$1 = $as_sci_Set($m_s_Predef$().Set$2.apply__sc_Seq__sc_GenTraversable($m_sci_Nil$()));
+                        elem$1 = $as_sci_Set($m_s_Predef$().Set$2.apply__sc_Seq__sc_GenTraversable($m_sci_Nil$()));
                         break matchEnd95
                       }
                     }
@@ -19306,28 +19546,10 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                         var p66 = $as_s_Option(x65.x$2);
                         var x$17 = $m_s_None$();
                         if ((x$17 === p66)) {
-                          if ((!p$7.isPawn__Z())) {
-                            if (((1 & elem$1$2) === 0)) {
-                              if (((1 & elem$1$2) === 0)) {
-                                elem$1 = this.between__Lostinato_core_XY__Lostinato_core_XY__Lostinato_core_BoardSize__sci_Set(from, to, $m_Lostinato_chess_core_package$().chessBoardSize$1).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer$2) {
-                                  return (function(l$2$2) {
-                                    var l$3 = $as_s_Option(l$2$2);
-                                    return arg$outer$2.isEmptyCell__s_Option__Z(l$3)
-                                  })
-                                })(this)));
-                                elem$1$2 = (1 | elem$1$2)
-                              };
-                              var jsx$16 = elem$1
-                            } else {
-                              var jsx$16 = elem$1
-                            }
-                          } else {
-                            var jsx$16 = false
-                          };
-                          if (jsx$16) {
+                          if (((!p$7.isPawn__Z()) && this.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z(from, to))) {
                             var array$7 = [new $c_Lostinato_chess_core_MoveActionFactory().init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY(p$7, delta)];
                             if (($uI(array$7["length"]) === 0)) {
-                              var jsx$17 = $m_sci_Set$EmptySet$()
+                              var jsx$14 = $m_sci_Set$EmptySet$()
                             } else {
                               var b$7 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                               var i$7 = 0;
@@ -19338,9 +19560,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                 b$7.$$plus$eq__O__scm_SetBuilder(arg1$7);
                                 i$7 = ((1 + i$7) | 0)
                               };
-                              var jsx$17 = b$7.elems$1
+                              var jsx$14 = b$7.elems$1
                             };
-                            elem$1$1 = $as_sci_Set(jsx$17);
+                            elem$1 = $as_sci_Set(jsx$14);
                             break matchEnd95
                           }
                         }
@@ -19362,35 +19584,17 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                           var x75 = $as_s_Some(p74);
                           var toP$3 = $as_Lostinato_chess_core_ChessPiece(x75.x$2);
                           if ((toP$3 !== null)) {
-                            if ((!p$8.isPawn__Z())) {
-                              if (((1 & elem$1$2) === 0)) {
-                                if (((1 & elem$1$2) === 0)) {
-                                  elem$1 = this.between__Lostinato_core_XY__Lostinato_core_XY__Lostinato_core_BoardSize__sci_Set(from, to, $m_Lostinato_chess_core_package$().chessBoardSize$1).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer$3) {
-                                    return (function(l$2$3) {
-                                      var l$4 = $as_s_Option(l$2$3);
-                                      return arg$outer$3.isEmptyCell__s_Option__Z(l$4)
-                                    })
-                                  })(this)));
-                                  elem$1$2 = (1 | elem$1$2)
-                                };
-                                var jsx$19 = elem$1
-                              } else {
-                                var jsx$19 = elem$1
-                              }
-                            } else {
-                              var jsx$19 = false
-                            };
-                            if ((jsx$19 && ((!toP$3.isKing__Z()) || rules.kingIsTakeable$2))) {
+                            if ((((!p$8.isPawn__Z()) && this.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z(from, to)) && ((!toP$3.isKing__Z()) || rules.kingIsTakeable$2))) {
                               var x$19 = toP$3.owner__Lostinato_core_Player();
                               var x$20 = p$8.owner__Lostinato_core_Player();
-                              var jsx$18 = (!(x$19 === x$20))
+                              var jsx$15 = (!(x$19 === x$20))
                             } else {
-                              var jsx$18 = false
+                              var jsx$15 = false
                             };
-                            if (jsx$18) {
+                            if (jsx$15) {
                               var array$8 = [new $c_Lostinato_chess_core_CaptureActionFactory().init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY__Lostinato_chess_core_ChessPiece(p$8, delta, toP$3)];
                               if (($uI(array$8["length"]) === 0)) {
-                                var jsx$20 = $m_sci_Set$EmptySet$()
+                                var jsx$16 = $m_sci_Set$EmptySet$()
                               } else {
                                 var b$8 = new $c_scm_SetBuilder().init___sc_Set($m_sci_Set$EmptySet$());
                                 var i$8 = 0;
@@ -19401,9 +19605,9 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                                   b$8.$$plus$eq__O__scm_SetBuilder(arg1$8);
                                   i$8 = ((1 + i$8) | 0)
                                 };
-                                var jsx$20 = b$8.elems$1
+                                var jsx$16 = b$8.elems$1
                               };
-                              elem$1$1 = $as_sci_Set(jsx$20);
+                              elem$1 = $as_sci_Set(jsx$16);
                               break matchEnd95
                             }
                           }
@@ -19412,24 +19616,24 @@ $c_Lostinato_chess_core_ChessBoard.prototype.movementsOfDelta__Lostinato_core_XY
                     }
                   }
                 };
-                elem$1$1 = $as_sci_Set($m_s_Predef$().Set$2.apply__sc_Seq__sc_GenTraversable($m_sci_Nil$()));
+                elem$1 = $as_sci_Set($m_s_Predef$().Set$2.apply__sc_Seq__sc_GenTraversable($m_sci_Nil$()));
                 break matchEnd95
               };
-              elem$1$2 = (2 | elem$1$2)
+              elem$1$1 = (1 | elem$1$1)
             };
-            var this$27 = $as_sci_Set(elem$1$1)
+            var this$26 = $as_sci_Set(elem$1)
           } else {
-            var this$27 = $as_sci_Set(elem$1$1)
+            var this$26 = $as_sci_Set(elem$1)
           };
-          var f$2 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer$4, rules$1) {
+          var f$2 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer, rules$1) {
             return (function(mf$2) {
               var mf = $as_Lostinato_chess_core_ChessActionFactory(mf$2);
-              return arg$outer$4.ostinato$chess$core$ChessBoard$$validateAfterAction$1__Lostinato_chess_core_ChessActionFactory__Lostinato_chess_core_ChessRules__sci_Set(mf, rules$1)
+              return arg$outer.ostinato$chess$core$ChessBoard$$validateAfterAction$1__Lostinato_chess_core_ChessActionFactory__Lostinato_chess_core_ChessRules__sci_Set(mf, rules$1)
             })
           })(this, rules));
-          var this$26 = $m_sci_Set$();
-          var bf$2 = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$26);
-          return $as_sci_Set($s_sc_TraversableLike$class__flatMap__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$27, f$2, bf$2))
+          var this$25 = $m_sci_Set$();
+          var bf$2 = new $c_scg_GenSetFactory$$anon$1().init___scg_GenSetFactory(this$25);
+          return $as_sci_Set($s_sc_TraversableLike$class__flatMap__sc_TraversableLike__F1__scg_CanBuildFrom__O(this$26, f$2, bf$2))
         }
       }
     }
@@ -19465,6 +19669,14 @@ $c_Lostinato_chess_core_ChessBoard.prototype.toFen__T = (function() {
     return $m_Lostinato_chess_core_Fen$().$$plus__Lostinato_chess_core_Fen__C__Lostinato_chess_core_Fen(f, $char)
   }))));
   return this$8.partialString$1
+});
+$c_Lostinato_chess_core_ChessBoard.prototype.betweenLocationsFree$1__p2__Lostinato_core_XY__Lostinato_core_XY__Z = (function(f, t) {
+  return this.between__Lostinato_core_XY__Lostinato_core_XY__Lostinato_core_BoardSize__sci_Set(f, t, $m_Lostinato_chess_core_package$().chessBoardSize$1).forall__F1__Z(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(arg$outer) {
+    return (function(l$2) {
+      var l = $as_s_Option(l$2);
+      return arg$outer.isEmptyCell__s_Option__Z(l)
+    })
+  })(this)))
 });
 $c_Lostinato_chess_core_ChessBoard.prototype.isEnPassantPawn$1__p2__Lostinato_core_XY__Z = (function(pos) {
   var this$1 = this.enPassantPawn$2;
@@ -21349,33 +21561,13 @@ $c_Lostinato_chess_core_$u265A.prototype.toIccf$lzycompute__p3__sr_Nothing$ = (f
   this.toIccf$3
 });
 $c_Lostinato_chess_core_$u265A.prototype.isInInitialPosition__Lostinato_chess_core_ChessRules__Z = (function(rules) {
-  return ((this.pos$1.x$1 === 4) && (this.pos$1.y$1 === this.initialY__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__I(rules, $m_Lostinato_chess_core_package$().chessBoardSize$1)))
+  return ((this.pos$1.x$1 === ($m_Lostinato_chess_core_package$(), $m_Lostinato_chess_core_$u265A$().initialX__I__I(rules.whitePawnDirection$2))) && (this.pos$1.y$1 === ($m_Lostinato_chess_core_package$(), $m_Lostinato_chess_core_$u265A$().initialY__Lostinato_chess_core_ChessPlayer__I__I($as_Lostinato_chess_core_ChessPlayer(this.owner$1), rules.whitePawnDirection$2))))
 });
 $c_Lostinato_chess_core_$u265A.prototype.productPrefix__T = (function() {
   return "\u265a"
 });
 $c_Lostinato_chess_core_$u265A.prototype.productArity__I = (function() {
   return 2
-});
-$c_Lostinato_chess_core_$u265A.prototype.initialY__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__I = (function(rules, chessBoardSize) {
-  var x = $as_Lostinato_chess_core_ChessPlayer(this.owner$1);
-  var x$2 = $m_Lostinato_chess_core_WhiteChessPlayer$();
-  if ((((x !== null) && (x === x$2)) && (rules.whitePawnDirection$2 === 1))) {
-    var jsx$1 = true
-  } else {
-    var x$3 = $as_Lostinato_chess_core_ChessPlayer(this.owner$1);
-    var x$4 = $m_Lostinato_chess_core_BlackChessPlayer$();
-    if (((x$3 !== null) && (x$3 === x$4))) {
-      var jsx$1 = (rules.whitePawnDirection$2 === (-1))
-    } else {
-      var jsx$1 = false
-    }
-  };
-  if (jsx$1) {
-    return 0
-  } else {
-    return (((-1) + chessBoardSize.y$1) | 0)
-  }
 });
 $c_Lostinato_chess_core_$u265A.prototype.equals__O__Z = (function(x$1) {
   if ((this === x$1)) {
@@ -21413,11 +21605,8 @@ $c_Lostinato_chess_core_$u265A.prototype.productElement__I__O = (function(x$1) {
 $c_Lostinato_chess_core_$u265A.prototype.toIccf__I = (function() {
   this.toIccf__sr_Nothing$()
 });
-$c_Lostinato_chess_core_$u265A.prototype.rookDeltaFor__Lostinato_core_XY__Lostinato_core_XY = (function(kingDelta) {
-  return new $c_Lostinato_core_XY().init___I__I(((kingDelta.x$1 < 0) ? 3 : (-2)), 0)
-});
 $c_Lostinato_chess_core_$u265A.prototype.targetRookPosition__I__Lostinato_chess_core_ChessRules__Lostinato_core_XY = (function(dx, rules) {
-  return new $c_Lostinato_core_XY().init___I__I(((dx < 0) ? 0 : (((-1) + $m_Lostinato_chess_core_package$().chessBoardSize$1.x$1) | 0)), this.initialY__Lostinato_chess_core_ChessRules__Lostinato_core_BoardSize__I(rules, $m_Lostinato_chess_core_package$().chessBoardSize$1))
+  return new $c_Lostinato_core_XY().init___I__I(((dx < 0) ? 0 : (((-1) + $m_Lostinato_chess_core_package$().chessBoardSize$1.x$1) | 0)), ($m_Lostinato_chess_core_package$(), $m_Lostinato_chess_core_$u265A$().initialY__Lostinato_chess_core_ChessPlayer__I__I($as_Lostinato_chess_core_ChessPlayer(this.owner$1), rules.whitePawnDirection$2)))
 });
 $c_Lostinato_chess_core_$u265A.prototype.movedTo__Lostinato_core_XY__Lostinato_core_Piece = (function(pos) {
   return new $c_Lostinato_chess_core_$u265A().init___Lostinato_core_XY__Lostinato_chess_core_ChessPlayer(pos, $as_Lostinato_chess_core_ChessPlayer(this.owner$1))
@@ -23192,7 +23381,7 @@ $c_Lostinato_chess_core_CastlingAction.prototype.gridUpdates__sci_List = (functi
   return $as_sci_List(jsx$3.$$plus$plus__sc_GenTraversableOnce__scg_CanBuildFrom__O(jsx$2, this$11.ReusableCBFInstance$2))
 });
 $c_Lostinato_chess_core_CastlingAction.prototype.toAn__Lostinato_chess_core_ChessRules__T = (function(rules) {
-  return (this.isKingside__Z() ? "0-0" : "0-0-0")
+  return (this.isKingside__Lostinato_chess_core_ChessRules__Z(rules) ? "0-0" : "0-0-0")
 });
 $c_Lostinato_chess_core_CastlingAction.prototype.toString__T = (function() {
   var jsx$1 = new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", "'s ", " castles"]));
@@ -23221,6 +23410,9 @@ $c_Lostinato_chess_core_CastlingAction.prototype.hashCode__I = (function() {
   acc = $m_sr_Statics$().mix__I__I__I(acc, (this.isCheckmate$3 ? 1231 : 1237));
   return $m_sr_Statics$().finalizeHash__I__I__I(acc, 6)
 });
+$c_Lostinato_chess_core_CastlingAction.prototype.isKingside__Lostinato_chess_core_ChessRules__Z = (function(rules) {
+  return (((this.delta$2.x$1 === 2) && (rules.whitePawnDirection$2 === (-1))) || ((this.delta$2.x$1 === (-2)) && (rules.whitePawnDirection$2 === 1)))
+});
 $c_Lostinato_chess_core_CastlingAction.prototype.productIterator__sc_Iterator = (function() {
   return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
 });
@@ -23231,9 +23423,6 @@ $c_Lostinato_chess_core_CastlingAction.prototype.init___Lostinato_chess_core_$u2
   this.isCheckmate$3 = isCheckmate;
   $c_Lostinato_chess_core_ChessAction.prototype.init___Lostinato_chess_core_ChessPiece__Lostinato_core_XY__Z__Z.call(this, fromPiece, kingDelta, false, false);
   return this
-});
-$c_Lostinato_chess_core_CastlingAction.prototype.isKingside__Z = (function() {
-  return (this.delta$2.sign__Lostinato_core_XY().x$1 === 1)
 });
 function $is_Lostinato_chess_core_CastlingAction(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lostinato_chess_core_CastlingAction)))
@@ -27225,6 +27414,9 @@ $c_sci_AbstractMap.prototype.empty__sci_Map = (function() {
 $c_sci_AbstractMap.prototype.seq__sc_Map = (function() {
   return this
 });
+$c_sci_AbstractMap.prototype.$$plus$plus__sc_GenTraversableOnce__sci_Map = (function(xs) {
+  return $s_sci_MapLike$class__$$plus$plus__sci_MapLike__sc_GenTraversableOnce__sci_Map(this, xs)
+});
 $c_sci_AbstractMap.prototype.toMap__s_Predef$$less$colon$less__sci_Map = (function(ev) {
   return this
 });
@@ -28496,6 +28688,9 @@ $c_sci_ListMap.prototype.$$minus__O__sc_Map = (function(key) {
 $c_sci_ListMap.prototype.empty__sci_Map = (function() {
   return $m_sci_ListMap$EmptyListMap$()
 });
+$c_sci_ListMap.prototype.$$plus$plus__sc_GenTraversableOnce__sci_Map = (function(xs) {
+  return this.$$plus$plus__sc_GenTraversableOnce__sci_ListMap(xs)
+});
 $c_sci_ListMap.prototype.size__I = (function() {
   return 0
 });
@@ -28514,6 +28709,15 @@ $c_sci_ListMap.prototype.key__O = (function() {
 });
 $c_sci_ListMap.prototype.updated__O__O__sci_Map = (function(key, value) {
   return this.updated__O__O__sci_ListMap(key, value)
+});
+$c_sci_ListMap.prototype.$$plus$plus__sc_GenTraversableOnce__sci_ListMap = (function(xs) {
+  return $as_sci_ListMap(xs.seq__sc_TraversableOnce().$$div$colon__O__F2__O(this, new $c_sjsr_AnonFunction2().init___sjs_js_Function2((function($this) {
+    return (function(x$2$2, x$3$2) {
+      var x$2 = $as_sci_ListMap(x$2$2);
+      var x$3 = $as_T2(x$3$2);
+      return x$2.updated__O__O__sci_ListMap(x$3.$$und1__O(), x$3.$$und2__O())
+    })
+  })(this))))
 });
 $c_sci_ListMap.prototype.updated__O__O__sci_ListMap = (function(key, value) {
   return new $c_sci_ListMap$Node().init___sci_ListMap__O__O(this, key, value)
@@ -29030,11 +29234,14 @@ $c_sci_MapLike$$anon$2.prototype.$$plus__T2__sci_Map = (function(kv) {
 $c_sci_MapLike$$anon$2.prototype.companion__scg_GenericCompanion = (function() {
   return $m_sci_Iterable$()
 });
+$c_sci_MapLike$$anon$2.prototype.$$minus__O__sc_Map = (function(key) {
+  return $s_sci_DefaultMap$class__$$minus__sci_DefaultMap__O__sci_Map(this, key)
+});
 $c_sci_MapLike$$anon$2.prototype.empty__sc_Map = (function() {
   return $m_sci_Map$EmptyMap$()
 });
-$c_sci_MapLike$$anon$2.prototype.$$minus__O__sc_Map = (function(key) {
-  return $s_sci_DefaultMap$class__$$minus__sci_DefaultMap__O__sci_Map(this, key)
+$c_sci_MapLike$$anon$2.prototype.$$plus$plus__sc_GenTraversableOnce__sci_Map = (function(xs) {
+  return $s_sci_MapLike$class__$$plus$plus__sci_MapLike__sc_GenTraversableOnce__sci_Map(this, xs)
 });
 $c_sci_MapLike$$anon$2.prototype.seq__sc_Map = (function() {
   return this

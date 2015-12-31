@@ -75,7 +75,7 @@ var board = null
 var init = function() {
 
 //--- start example JS ---
-board = ChessBoard('board');
+board = ChessBoard('board', { moveSpeed: 'fast' });
 board.start()
 //--- end example JS ---
 OstinatoExampleApp().main();
@@ -97,18 +97,17 @@ object OstinatoExampleApp extends JSApp {
       BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
     )</b>
 
-    def doAction() = {
+    def doAction(): SetTimeoutHandle = {
       <b>board = ai(board.turn).nextNonFinalAction(board.game) match {
         case Some(a) ⇒ board.doAction(a).get
         case None    ⇒ initialBoard
       }</b>
       Board.position(<b>board.toFen</b>)
+
+      setTimeout(600.millis) { doAction() }
     }
 
     doAction()
-    setInterval(400.millis) {
-      doAction()
-    }
   }
 }
 

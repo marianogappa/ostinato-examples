@@ -16,18 +16,17 @@ object OstinatoExampleApp extends JSApp {
       BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
     )
 
-    def doAction() = {
+    def doAction(): SetTimeoutHandle = {
       board = ai(board.turn).nextNonFinalAction(board.game) match {
         case Some(a) ⇒ board.doAction(a).get
         case None    ⇒ initialBoard
       }
       Board.position(board.toFen)
+
+      setTimeout(600.millis) { doAction() }
     }
 
     doAction()
-    setInterval(400.millis) {
-      doAction()
-    }
   }
 }
 
