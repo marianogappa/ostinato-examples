@@ -20,7 +20,7 @@ object OstinatoChessExampleApp extends JSApp {
   def randomMove() = doActionSideEffects(OstinatoProxy.randomMove(game))
 
   @JSExport
-  def render() = Board.position(game.board.toFen)
+  def render() = Board.position(game.toShortFen)
 
   private def doActionSideEffects(action: ChessAction) = {
     game = game.board.doAction(action).get.game

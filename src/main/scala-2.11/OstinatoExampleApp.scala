@@ -21,7 +21,7 @@ object OstinatoExampleApp extends JSApp {
         case Some(a) ⇒ board.doAction(a).get
         case None    ⇒ initialBoard
       }
-      Board.position(board.toFen)
+      Board.position(board.toShortFen)
 
       setTimeout(600.millis) { doAction() }
     }
