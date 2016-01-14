@@ -29,7 +29,11 @@ object OstinatoChessExampleApp extends JSApp {
 }
 
 object OstinatoProxy {
-  def randomMove(game: ChessGame) = ChessBasicAi(BlackChessPlayer).nextAction(game).get
+  def randomMove(game: ChessGame) = {
+    val a = ChessBasicAi(BlackChessPlayer, debug = true).nextAction(game).get
+    println(a)
+    a
+  }
 
   def move(game: ChessGame, from: String, to: String) = {
     val fromPos = ChessXY.fromAn(from).get
