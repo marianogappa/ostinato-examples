@@ -17,7 +17,7 @@ object OstinatoChessExampleApp extends JSApp {
   def move(from: String, to: String) = OstinatoProxy.move(game, from, to).map(a => { doActionSideEffects(a); a }).nonEmpty
 
   @JSExport
-  def randomMove() = doActionSideEffects(OstinatoProxy.randomMove(game))
+  def randomMove(depth: Int = 1, debug: Int = 0) = doActionSideEffects(OstinatoProxy.randomMove(game, depth, debug))
 
   @JSExport
   def render() = Board.position(game.toShortFen)
@@ -29,10 +29,8 @@ object OstinatoChessExampleApp extends JSApp {
 }
 
 object OstinatoProxy {
-  def randomMove(game: ChessGame) = {
-    val a = ChessBasicAi(BlackChessPlayer, debug = true).nextAction(game).get
-    println(a)
-    a
+  def randomMove(game: ChessGame, chosenDepth: Int = 1, chosenDebug: Int = 0) = {
+    ChessBasicAi(BlackChessPlayer, debug = chosenDebug == 1, depth = chosenDepth).nextAction(game).get
   }
 
   def move(game: ChessGame, from: String, to: String) = {

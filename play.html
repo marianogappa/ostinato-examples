@@ -72,6 +72,15 @@
 var init = function() {
 OstinatoChessExampleApp().main();
 
+// Parse query string
+var queryDict = {}
+location.search.substr(1).split("&").forEach(function(item) {
+    queryDict[item.split("=")[0]] = item.split("=")[1]
+})
+
+depth = queryDict.depth || 1
+debug = queryDict.debug || 0
+
 //--- start example JS ---
 // do not pick up pieces if the game is over
 // only pick up pieces for White
@@ -81,7 +90,7 @@ var onDragStart = function(source, piece, position, orientation) {
   }
 };
 
-var move = function() { OstinatoChessExampleApp().randomMove() }
+var move = function() { OstinatoChessExampleApp().randomMove(depth, debug) }
 
 var onDrop = function(source, target) {
   if (OstinatoChessExampleApp().move(source, target) === false)
