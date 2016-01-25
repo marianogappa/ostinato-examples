@@ -70,16 +70,21 @@
 <script type="text/javascript" src="./target/scala-2.11/ostinato-example-opt.js"></script>
 <script>
 var init = function() {
-OstinatoChessExampleApp().main();
 
 // Parse query string
-var queryDict = {}
-location.search.substr(1).split("&").forEach(function(item) {
-    queryDict[item.split("=")[0]] = item.split("=")[1]
-})
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
-depth = queryDict.depth || 1
-debug = queryDict.debug || 0
+depth = getParameterByName('depth') || 1
+debug = getParameterByName('debug') || 0
+fen = getParameterByName('fen') || "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+OstinatoChessExampleApp().main();
+shouldMove = OstinatoChessExampleApp().fromFen(fen);
 
 //--- start example JS ---
 // do not pick up pieces if the game is over
@@ -113,6 +118,12 @@ var cfg = {
   onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
+OstinatoChessExampleApp().render()
+if (shouldMove)
+    if (depth < 2)
+        setTimeout(move, 1000)
+    else
+        move()
 //--- end example JS ---
 
 }; // end init()

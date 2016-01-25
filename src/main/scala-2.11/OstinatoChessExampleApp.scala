@@ -11,6 +11,12 @@ object OstinatoChessExampleApp extends JSApp {
   def main() = ()
 
   @JSExport
+  def fromFen(fen: String) = {
+    ChessGame.fromFen(fen) foreach { game = _ }
+    game.board.turn == BlackChessPlayer
+  }
+
+  @JSExport
   def isFinalBoard() = game.isGameOver
 
   @JSExport

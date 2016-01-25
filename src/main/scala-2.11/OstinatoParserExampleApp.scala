@@ -16,6 +16,13 @@ object OstinatoParserExampleApp extends JSApp {
   @JSExport
   var positions: Array[String] = null
 
+  @JSExport
+  def currentFenBoard() =
+    if (currentPosition == -1)
+      ChessGame.defaultGame.board.toFen
+    else
+      positions(currentPosition)
+
   lazy val buttons = """<button id="previous" onclick="javascript:OstinatoParserExampleApp().previous()">&lt</button>
                        |<button id="next" onclick="javascript:OstinatoParserExampleApp().next()">&gt</button>
                        |""".stripMargin
@@ -48,12 +55,7 @@ object OstinatoParserExampleApp extends JSApp {
   }
 
   @JSExport
-  def render() = {
-    if (currentPosition == -1)
-      Board.position(ChessGame.defaultGame.board.toFen)
-    else
-      Board.position(positions(currentPosition))
-  }
+  def render() = Board.position(currentFenBoard())
 
   @JSExport
   def next() = {
