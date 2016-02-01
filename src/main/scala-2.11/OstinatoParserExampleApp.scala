@@ -1,4 +1,5 @@
 import org.scalajs.dom.html
+import ostinato.chess.core.NotationParser._
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -17,11 +18,17 @@ object OstinatoParserExampleApp extends JSApp {
   var positions: Array[String] = null
 
   @JSExport
-  def currentFenBoard() =
+  def currentFenBoard() = {
     if (currentPosition == -1)
       ChessGame.defaultGame.board.toFen
     else
       positions(currentPosition)
+  }
+
+  @JSExport
+  def currentHumanPlayer() = {
+    if (currentPosition % 2 == 0) "black" else "white"
+  }
 
   lazy val buttons = """<button id="previous" onclick="javascript:OstinatoParserExampleApp().previous()">&lt</button>
                        |<button id="next" onclick="javascript:OstinatoParserExampleApp().next()">&gt</button>
@@ -32,25 +39,25 @@ object OstinatoParserExampleApp extends JSApp {
     val results = NotationParser.parseMatchString(input.value).results
 
     results.head match {
-      case (steps, notationRules) ⇒
+      case ParsedMatch(steps, notationRules) ⇒
         currentPosition = -1
         render()
-        positions = steps.filter(_._2.nonEmpty).map(_._2.get._2.toFen).toArray
+        positions = steps.filter(_.maybeGameStep.nonEmpty).map(_.maybeGameStep.get.board.toFen).toArray
 
         target.innerHTML = buttons +
           steps.zipWithIndex.grouped(2).zipWithIndex.map {
-            case (states: List[((String, Option[(ChessAction, ChessBoard)]), Int)], index: Int) ⇒
+            case (states: List[(ParseStep, Int)], index: Int) ⇒
               s"""<div class="line">${index + 1}. ${renderLineWithErrors(states)}</div>"""
           }.mkString + s"""<br/><div class="line" style="width: 100px">""" + showNotation(notationRules) + "</div>"
     }
   }
 
-  private def showNotation(notationRules: Either[Option[NotationRules], NotationRules]) = notationRules match {
-    case Left(None) ⇒
+  private def showNotation(notationRules: ParsingResult) = notationRules match {
+    case FailedParse(None) ⇒
       "What is this?"
-    case Left(Some(r: NotationRules)) ⇒
+    case FailedParse(Some(r: NotationRules)) ⇒
       "<b>Most likely:</b><br/> " + r.fullName
-    case Right(r: NotationRules) ⇒
+    case SuccessfulParse(r: NotationRules) ⇒
       "<b>Parsed as:</b><br/> " + r.fullName
   }
 
@@ -73,10 +80,10 @@ object OstinatoParserExampleApp extends JSApp {
     }
   }
 
-  def renderLineWithErrors(line: List[((String, Option[(ChessAction, ChessBoard)]), Int)]) = line.map {
-    case ((rawAction: String, Some((action: ChessAction, board: ChessBoard))), halfIndex: Int) ⇒
+  def renderLineWithErrors(line: List[(ParseStep, Int)]) = line.map {
+    case (ParseStep(rawAction: String, Some(GameStep(action: ChessAction, board: ChessBoard))), halfIndex: Int) ⇒
       s"""<a href="javascript:OstinatoParserExampleApp().currentPosition=$halfIndex; javascript:OstinatoParserExampleApp().render()">${rawAction}</a>"""
-    case ((rawAction: String, None), halfIndex: Int) ⇒
+    case (ParseStep(rawAction: String, None), halfIndex: Int) ⇒
       s"""<i>$rawAction</i>"""
   }.mkString(" ")
 

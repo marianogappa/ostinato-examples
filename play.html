@@ -81,21 +81,24 @@ function getParameterByName(name) {
 
 depth = getParameterByName('depth') || 1
 debug = getParameterByName('debug') || 0
+humanPlayer = getParameterByName('humanPlayer') || 'white'
 fen = getParameterByName('fen') || "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 OstinatoChessExampleApp().main();
-shouldMove = OstinatoChessExampleApp().fromFen(fen);
+OstinatoChessExampleApp().fromFen(fen, humanPlayer);
 
 //--- start example JS ---
 // do not pick up pieces if the game is over
-// only pick up pieces for White
+// only pick up pieces for current human player
 var onDragStart = function(source, piece, position, orientation) {
-  if (OstinatoChessExampleApp().isFinalBoard() || piece.search(/^b/) !== -1) {
+  if (OstinatoChessExampleApp().isFinalBoard() ||
+        (humanPlayer == 'white' && piece.search(/^b/) !== -1) ||
+        (humanPlayer == 'black' && piece.search(/^w/) !== -1)) {
     return false;
   }
 };
 
-var move = function() { OstinatoChessExampleApp().randomMove(depth, debug) }
+var move = function() { OstinatoChessExampleApp().randomMove(humanPlayer, depth, debug) }
 
 var onDrop = function(source, target) {
   if (OstinatoChessExampleApp().move(source, target) === false)
@@ -118,12 +121,8 @@ var cfg = {
   onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
+board.orientation(humanPlayer);
 OstinatoChessExampleApp().render()
-if (shouldMove)
-    if (depth < 2)
-        setTimeout(move, 1000)
-    else
-        move()
 //--- end example JS ---
 
 }; // end init()

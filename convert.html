@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chess Match Parser</title>
+    <title>Chess Match Notation Converter</title>
     <link rel="stylesheet" href="css/chessboard-0.3.0.min.css" />
     <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -140,16 +140,23 @@
 </a>
 
 <section>
-    <h1>Chess Match Parser</h1>
-    <div id="board" style="width: 400px"></div>
-    <div id="actions"></div>
+    <h1>Chess Match Notation Converter</h1>
 </section>
 <section>
-<button class="play" onclick="javascript:play()">PLAY FROM THIS BOARD</button>
-<button class="play" onclick="javascript:convert()">CONVERT NOTATION...</button>
 <h3>Paste a chess match here</h3>
-<textarea id="input" onkeyup="javascript:doRefresh()">
-</textarea>
+<textarea id="input" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)">
+</textarea><br/>
+    <select id="notation" onchange="javascript:doRefresh(document.getElementById('notation').value, true)">
+        <option value="Algebraic Notation" selected="selected">Algebraic Notation</option>
+        <option value="Figurine Algebraic Notation">Figurine Algebraic Notation</option>
+        <option value="Descriptive Notation">Descriptive Notation</option>
+        <option value="Coordinate Notation">Coordinate Notation</option>
+        <option value="ICCF Notation">ICCF Notation</option>
+        <option value="Smith Notation">Smith Notation</option>
+    </select>
+<h3>Converted match</h3>
+<div id="output">
+</div>
 <script>
 var pgn = "[Event \"Ostinato Testing\"]\n[Site \"Buenos Aires, Argentina\"]\n[Date \"2015.??.??\"]\n[Round \"1\"]\n[Result \"½–½\"]\n[White \"Fake Player 1\"]\n[Black \"Fake Player 2\"]\n1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. Nge2\ndxe4 7. 0-0\n";
 var algebraic = "e4 e6\nd4 d5\nNc3 Bb4\nBb5+ Bd7\nBxd7+ Qxd7\nNge2 dxe4\n0-0";
@@ -164,50 +171,47 @@ function resetInput(s) {
 }
 </script>
 
-<div class="examples">
+<!--<div class="examples">
     <a href="javascript:resetInput(pgn)">← PGN Example</a><br/>
     <a href="javascript:resetInput(algebraic)">← Algebraic Notation Example</a><br/>
     <a href="javascript:resetInput(coordinate)">← Coordinate Notation Example</a><br/>
     <a href="javascript:resetInput(descriptive)">← Descriptive Notation Example</a><br/>
     <a href="javascript:resetInput(iccf)">← ICCF Notation Example</a><br/>
     <a href="javascript:resetInput(smith)">← Smith Notation Example</a>
-</div>
+</div>-->
 </section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/chessboard-0.3.0.min.js"></script>
 <script type="text/javascript" src="./target/scala-2.11/ostinato-example-opt.js"></script>
 <script>
 var board = null
 
-
 var init = function() {
 
-//--- start example JS ---
-board = ChessBoard('board');
-board.start()
-//--- end example JS ---
-OstinatoParserExampleApp().main();
+// Parse query string
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+match = getParameterByName('match') || iccf
+
+
+OstinatoConverterExampleApp().main();
 doRefresh()
-document.getElementById('input').innerHTML = pgn;
+document.getElementById('input').innerHTML = match;
 }; // end init()
 
 var timer;
-var doRefresh = function() {
+var doRefresh = function(notation, nowait) {
+console.log(notation)
+    waitTime = nowait ? 0 : 1000
     clearTimeout(timer);
     timer = setTimeout(function () {
-        OstinatoParserExampleApp().refresh(document.getElementById('input'), document.getElementById('actions'))
+        OstinatoConverterExampleApp().convert(document.getElementById('input'), document.getElementById('output'), notation)
     }, 1000);
-}
-
-var play = function() {
-    location.href = "play.html?" +
-        "humanPlayer=" + OstinatoParserExampleApp().currentHumanPlayer() + "&" +
-        "fen=" +         encodeURIComponent(OstinatoParserExampleApp().currentFenBoard())
-}
-
-var convert = function() {
-    location.href = "convert.html?match=" + encodeURIComponent($('#input').val())
 }
 
 $(document).ready(init);

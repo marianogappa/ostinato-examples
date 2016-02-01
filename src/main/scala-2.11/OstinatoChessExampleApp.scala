@@ -7,23 +7,27 @@ import ostinato.chess.core._
 @JSExport
 object OstinatoChessExampleApp extends JSApp {
   var game = ChessGame.defaultGame
+  var humanPlayer: ChessPlayer = WhiteChessPlayer
 
   def main() = ()
 
   @JSExport
-  def fromFen(fen: String) = {
+  def fromFen(fen: String, _humanPlayer: String) = {
     ChessGame.fromFen(fen) foreach { game = _ }
-    game.board.turn == BlackChessPlayer
+    humanPlayer = if (_humanPlayer == "white") WhiteChessPlayer else BlackChessPlayer
+    game.board.turn == humanPlayer
   }
 
   @JSExport
   def isFinalBoard() = game.isGameOver
 
   @JSExport
-  def move(from: String, to: String) = OstinatoProxy.move(game, from, to).map(a => { doActionSideEffects(a); a }).nonEmpty
+  def move(from: String, to: String) = {
+    OstinatoProxy.move(game, from, to).map(a => { doActionSideEffects(a); a }).nonEmpty
+  }
 
   @JSExport
-  def randomMove(depth: Int = 1, debug: Int = 0) = doActionSideEffects(OstinatoProxy.randomMove(game, depth, debug))
+  def randomMove(depth: Int = 1, debug: Int = 0) = doActionSideEffects(OstinatoProxy.randomMove(game, humanPlayer.enemy, depth, debug))
 
   @JSExport
   def render() = Board.position(game.toShortFen)
@@ -35,8 +39,8 @@ object OstinatoChessExampleApp extends JSApp {
 }
 
 object OstinatoProxy {
-  def randomMove(game: ChessGame, chosenDepth: Int = 1, chosenDebug: Int = 0) = {
-    ChessBasicAi(BlackChessPlayer, debug = chosenDebug == 1, depth = chosenDepth).nextAction(game).get
+  def randomMove(game: ChessGame, player: ChessPlayer, chosenDepth: Int = 1, chosenDebug: Int = 0) = {
+    ChessBasicAi(player, debug = chosenDebug == 1, depth = chosenDepth).nextAction(game).get
   }
 
   def move(game: ChessGame, from: String, to: String) = {
