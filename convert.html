@@ -170,19 +170,10 @@ function resetInput(s) {
     doRefresh()
 }
 </script>
-
-<!--<div class="examples">
-    <a href="javascript:resetInput(pgn)">← PGN Example</a><br/>
-    <a href="javascript:resetInput(algebraic)">← Algebraic Notation Example</a><br/>
-    <a href="javascript:resetInput(coordinate)">← Coordinate Notation Example</a><br/>
-    <a href="javascript:resetInput(descriptive)">← Descriptive Notation Example</a><br/>
-    <a href="javascript:resetInput(iccf)">← ICCF Notation Example</a><br/>
-    <a href="javascript:resetInput(smith)">← Smith Notation Example</a>
-</div>-->
 </section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="./target/scala-2.11/ostinato-example-opt.js"></script>
+<script type="text/javascript" src="ostinato.js"></script>
 <script>
 var board = null
 
@@ -199,10 +190,9 @@ function getParameterByName(name) {
 match = getParameterByName('match') || iccf
 
 
-OstinatoConverterExampleApp().main();
 doRefresh()
 document.getElementById('input').innerHTML = match;
-}; // end init()
+};
 
 var timer;
 var doRefresh = function(notation, nowait) {
@@ -210,7 +200,33 @@ console.log(notation)
     waitTime = nowait ? 0 : 1000
     clearTimeout(timer);
     timer = setTimeout(function () {
-        OstinatoConverterExampleApp().convert(document.getElementById('input'), document.getElementById('output'), notation)
+
+        var result = ostinato.chess.js.Js().convertNotation(document.getElementById('input').value, notation)
+
+        fullAction = 1
+        halfAction = 0
+        currentAction = 0
+        actionsString = ''
+        for (action in result.actions) {
+            if (halfAction == 0)
+                actionsString += '<div class="line">' + fullAction + '. '
+
+            halfAction++
+
+            if (result.validActionCount >= currentAction + 1)
+                actionsString += result.actions[currentAction] + ' '
+            else
+                actionsString += '<i>' + result.actions[currentAction] + '</i> '
+
+            currentAction++
+            if (halfAction == 2) {
+                halfAction = 0
+                fullAction++
+                actionsString += '</div>'
+            }
+        }
+
+        document.getElementById('output').innerHTML = actionsString
     }, 1000);
 }
 

@@ -148,7 +148,7 @@
 <button class="play" onclick="javascript:play()">PLAY FROM THIS BOARD</button>
 <button class="play" onclick="javascript:convert()">CONVERT NOTATION...</button>
 <h3>Paste a chess match here</h3>
-<textarea id="input" onkeyup="javascript:doRefresh()">
+<textarea id="input" onkeyup="javascript:refresh()">
 </textarea>
 <script>
 var pgn = "[Event \"Ostinato Testing\"]\n[Site \"Buenos Aires, Argentina\"]\n[Date \"2015.??.??\"]\n[Round \"1\"]\n[Result \"½–½\"]\n[White \"Fake Player 1\"]\n[Black \"Fake Player 2\"]\n1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. Nge2\ndxe4 7. 0-0\n";
@@ -160,7 +160,7 @@ var smith = "1. e2e4  e7e6\n2. d2d4  d7d5\n3. b1c3  f8b4\n4. f1b5  c8d7\n5. b5d7
 
 function resetInput(s) {
     document.getElementById('input').value = s
-    doRefresh()
+    refresh()
 }
 </script>
 
@@ -176,34 +176,105 @@ function resetInput(s) {
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/chessboard-0.3.0.min.js"></script>
-<script type="text/javascript" src="./target/scala-2.11/ostinato-example-opt.js"></script>
+<script type="text/javascript" src="ostinato.js"></script>
 <script>
 var board = null
-
+var currentPosition = -1
+var positions = []
+var timer
+document.getElementById('input').innerHTML = pgn;
 
 var init = function() {
 
-//--- start example JS ---
-board = ChessBoard('board');
-board.start()
-//--- end example JS ---
-OstinatoParserExampleApp().main();
-doRefresh()
-document.getElementById('input').innerHTML = pgn;
+    //--- start example JS ---
+    board = ChessBoard('board');
+    board.start()
+    //--- end example JS ---
+    refresh()
 }; // end init()
 
-var timer;
-var doRefresh = function() {
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-        OstinatoParserExampleApp().refresh(document.getElementById('input'), document.getElementById('actions'))
-    }, 1000);
+var currentFenBoard = function() {
+    if (currentPosition == -1)
+      return ostinato.chess.js.Js().defaultGame
+    else
+      return positions[currentPosition]
+}
+
+var currentHumanPlayer = function() {
+    if (currentPosition % 2 == 0)
+        "black"
+    else
+        "white"
+}
+
+var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button><button id="next" onclick="javascript:next()">&gt</button>'
+
+var next = function() {
+    if (currentPosition < positions.length - 1) {
+      currentPosition += 1
+      board.position(currentFenBoard())
+    }
+}
+
+var previous = function() {
+    if (currentPosition > -1) {
+      currentPosition -= 1
+      board.position(currentFenBoard())
+    }
+}
+
+var refresh = function() {
+    var input = document.getElementById('input')
+    var target = document.getElementById('actions')
+
+    var parsedNotation = ostinato.chess.js.Js().parseNotation(document.getElementById('input').value)
+
+    currentPosition = -1
+    board.position(currentFenBoard())
+    positions = parsedNotation.fenBoards
+
+    fullAction = 1
+    halfAction = 0
+    currentAction = 0
+    actionsString = ''
+    for (action in parsedNotation.actions) {
+        if (halfAction == 0)
+            actionsString += '<div class="line">' + fullAction + '. '
+
+        halfAction++
+
+        if (parsedNotation.validActionCount >= currentAction + 1)
+            actionsString += '<a href="javascript:currentPosition=' + currentAction +
+                '; javascript:board.position(currentFenBoard())">' + parsedNotation.actions[currentAction] +
+                '</a> '
+        else
+            actionsString += '<i>' + parsedNotation.actions[currentAction] + '</i> '
+
+        currentAction++
+        if (halfAction == 2) {
+            halfAction = 0
+            fullAction++
+            actionsString += '</div>'
+        }
+    }
+
+    var showNotation = ''
+    if (parsedNotation.parseWasSuccessful)
+        showNotation = "<b>Parsed as:</b><br/> " + parsedNotation.notationName
+    else if (!parsedNotation.parseWasSuccessful && parsedNotation.notationName != "")
+        showNotation = "<b>Most likely:</b><br/> " + parsedNotation.notationName
+    else
+        showNotation = "What is this?"
+
+    var fullShowNotation = '<br/><br/><div class="line" style="width: 100px">' + showNotation + '</div>'
+
+    target.innerHTML = buttons + actionsString + fullShowNotation
 }
 
 var play = function() {
     location.href = "play.html?" +
-        "humanPlayer=" + OstinatoParserExampleApp().currentHumanPlayer() + "&" +
-        "fen=" +         encodeURIComponent(OstinatoParserExampleApp().currentFenBoard())
+        "humanPlayer=" + currentHumanPlayer() + "&" +
+        "fen=" +         encodeURIComponent(currentFenBoard())
 }
 
 var convert = function() {

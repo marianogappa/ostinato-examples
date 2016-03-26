@@ -67,19 +67,23 @@
 <div id="board" style="width: 400px"></div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/chessboard-0.3.0.min.js"></script>
-<script type="text/javascript" src="./target/scala-2.11/ostinato-example-opt.js"></script>
+<script type="text/javascript" src="ostinato.js"></script>
 <script>
-var board = null
-
+var boardUi = null
+var board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+var aiPlayer = 'white'
 
 var init = function() {
 
-//--- start example JS ---
-board = ChessBoard('board', { moveSpeed: 'fast' });
-board.start()
-//--- end example JS ---
-OstinatoExampleApp().main();
-}; // end init()
+    window.setInterval(function (){
+        board = ostinato.chess.js.Js().randomAiMove(board, aiPlayer)
+        if (aiPlayer == 'white') aiPlayer = 'black'; else aiPlayer = 'white'
+        boardUi.position(board)
+    }, 600)
+
+    boardUi = ChessBoard('board', { moveSpeed: 'fast' });
+    boardUi.start()
+};
 $(document).ready(init);
 </script>
 </section>
@@ -88,34 +92,22 @@ $(document).ready(init);
     <h1>Source Code</h1>
 
     <pre><b>// ostinato code in green</b>
-object OstinatoExampleApp extends JSApp {
-  def main(): Unit = {
-    <b>val initialBoard = ChessGame.defaultGame.board
-    var board: ChessBoard = initialBoard
-    val ai: Map[ChessPlayer, ChessRandomAi] = Map(
-      WhiteChessPlayer -> ChessRandomAi(WhiteChessPlayer),
-      BlackChessPlayer -> ChessRandomAi(BlackChessPlayer)
-    )</b>
+var boardUi = null
+var board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+var aiPlayer = 'white'
 
-    def doAction(): SetTimeoutHandle = {
-      <b>board = ai(board.turn).nextNonFinalAction(board.game) match {
-        case Some(a) ⇒ board.doAction(a).get
-        case None    ⇒ initialBoard
-      }</b>
-      Board.position(<b>board.toShortFen</b>)
+var init = function() {
 
-      setTimeout(600.millis) { doAction() }
-    }
+    window.setInterval(function (){
+        board = <b>ostinato.chess.js.Js().randomAiMove(board, aiPlayer)</b>
+        if (aiPlayer == 'white') aiPlayer = 'black'; else aiPlayer = 'white'
+        boardUi.position(board)
+    }, 600)
 
-    doAction()
-  }
-}
-
-@JSName("board")
-@js.native
-object Board extends js.Object {
-  def position(a: String): Unit = js.native
-}
+    boardUi = ChessBoard('board', { moveSpeed: 'fast' });
+    boardUi.start()
+};
+$(document).ready(init);
         </pre>
 </span>
 </section>
