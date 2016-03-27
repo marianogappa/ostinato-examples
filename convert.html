@@ -196,7 +196,6 @@ document.getElementById('input').innerHTML = match;
 
 var timer;
 var doRefresh = function(notation, nowait) {
-console.log(notation)
     waitTime = nowait ? 0 : 1000
     clearTimeout(timer);
     timer = setTimeout(function () {
@@ -227,7 +226,7 @@ console.log(notation)
         }
 
         document.getElementById('output').innerHTML = actionsString
-    }, 1000);
+    }, waitTime);
 }
 
 $(document).ready(init);
