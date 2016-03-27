@@ -186,12 +186,10 @@ document.getElementById('input').innerHTML = pgn;
 
 var init = function() {
 
-    //--- start example JS ---
     board = ChessBoard('board');
     board.start()
-    //--- end example JS ---
     refresh()
-}; // end init()
+}
 
 var currentBoard = function() {
     if (currentPosition == -1)
