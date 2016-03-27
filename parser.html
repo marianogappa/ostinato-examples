@@ -145,7 +145,7 @@
     <div id="actions"></div>
 </section>
 <section>
-<!-- <button class="play" onclick="javascript:play()">PLAY FROM THIS BOARD</button> -->
+<button class="play" onclick="javascript:play()">PLAY FROM THIS BOARD</button>
 <button class="play" onclick="javascript:convert()">CONVERT NOTATION...</button>
 <h3>Paste a chess match here</h3>
 <textarea id="input" onkeyup="javascript:refresh()">
@@ -193,7 +193,7 @@ var init = function() {
     refresh()
 }; // end init()
 
-var currentFenBoard = function() {
+var currentBoard = function() {
     if (currentPosition == -1)
       return ostinato.chess.js.Js().defaultGame
     else
@@ -201,10 +201,7 @@ var currentFenBoard = function() {
 }
 
 var currentHumanPlayer = function() {
-    if (currentPosition % 2 == 0)
-        "black"
-    else
-        "white"
+    return (currentPosition % 2 == 0) ? "black" : "white"
 }
 
 var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button><button id="next" onclick="javascript:next()">&gt</button>'
@@ -212,14 +209,14 @@ var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button
 var next = function() {
     if (currentPosition < positions.length - 1) {
       currentPosition += 1
-      board.position(currentFenBoard())
+      board.position(currentBoard())
     }
 }
 
 var previous = function() {
     if (currentPosition > -1) {
       currentPosition -= 1
-      board.position(currentFenBoard())
+      board.position(currentBoard())
     }
 }
 
@@ -230,8 +227,8 @@ var refresh = function() {
     var parsedNotation = ostinato.chess.js.Js().parseNotation(document.getElementById('input').value)
 
     currentPosition = -1
-    board.position(currentFenBoard())
-    positions = parsedNotation.fenBoards
+    board.position(currentBoard())
+    positions = parsedNotation.boards
 
     fullAction = 1
     halfAction = 0
@@ -245,7 +242,7 @@ var refresh = function() {
 
         if (parsedNotation.validActionCount >= currentAction + 1)
             actionsString += '<a href="javascript:currentPosition=' + currentAction +
-                '; javascript:board.position(currentFenBoard())">' + parsedNotation.actions[currentAction] +
+                '; javascript:board.position(currentBoard())">' + parsedNotation.actions[currentAction] +
                 '</a> '
         else
             actionsString += '<i>' + parsedNotation.actions[currentAction] + '</i> '
@@ -274,7 +271,7 @@ var refresh = function() {
 var play = function() {
     location.href = "play.html?" +
         "humanPlayer=" + currentHumanPlayer() + "&" +
-        "fen=" +         encodeURIComponent(currentFenBoard())
+        "fen=" +         encodeURIComponent(currentBoard())
 }
 
 var convert = function() {
