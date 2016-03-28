@@ -53,6 +53,7 @@
         #board-container {
             text-align: center;
             font-size: 20px;
+            display: inline-block;
         }
         #ai-side span, #human-side span {
             padding-right: 10px;
@@ -61,6 +62,12 @@
         #ai-side img, #human-side img {
             display: none;
             height: 15px;
+        }
+        #preferences {
+          display: inline-block;
+          vertical-align: top;
+          padding-left: 15px;
+          padding-top: 20px;
         }
     </style>
     <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -81,6 +88,14 @@
     <div id="board" style="width: 400px"></div>
     <div id="human-side"><img id="human-turn" src="img/chesspieces/wikipedia/bP.png" /><img id="human-wins" src="img/wins.png" /><span>Human</span></div>
 </div>
+<div id="preferences">
+  <form onchange="javascript:depth=$('input[name=depth_control]:checked').val()">
+    <input type="radio" id="depth_control" name="depth_control" value="0">Easy</input><br/>
+    <input type="radio" id="depth_control" name="depth_control" value="1">Medium</input><br/>
+    <input type="radio" id="depth_control" name="depth_control" value="2">Hard (laggy)</input><br/>
+  </form>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/chessboard-0.3.0.min.js"></script>
 <script type="text/javascript" src="ostinato.js"></script>
@@ -95,6 +110,7 @@ var init = function() {
   }
 
   depth = getParameterByName('depth') || 1
+  $('input[name="depth_control"][value="' + depth + '"]').prop('checked', true);
   debug = getParameterByName('debug') || 0
   humanPlayer = getParameterByName('humanPlayer') || 'white'
   if (humanPlayer == 'white')
