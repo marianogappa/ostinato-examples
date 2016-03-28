@@ -109,6 +109,7 @@ var init = function() {
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "))
   }
 
+  useServer = getParameterByName('useServer') || 0
   depth = getParameterByName('depth') || 1
   $('input[name="depth_control"][value="' + depth + '"]').prop('checked', true);
   debug = getParameterByName('debug') || 0
@@ -132,7 +133,7 @@ var init = function() {
   }
 
   var move = function() {
-      aiMove = ostinato.chess.js.Js().basicAiMove(board, aiPlayer, parseInt(depth), debug == true)
+      aiMove = basicAiMoveCall(board, aiPlayer, parseInt(depth), debug == true)
 
       // console.log(aiMove)
 
@@ -153,7 +154,8 @@ var init = function() {
   }
 
   var onDrop = function(source, target) {
-    var humanMove = ostinato.chess.js.Js().move(board, source, target)
+    console.log(board)
+    var humanMove = moveCall(board, source, target)
 
     newBoard = ""
     if (humanMove.success) {
@@ -202,6 +204,40 @@ var init = function() {
         $('#human-turn').hide()
         $('#ai-turn').show()
       }
+    }
+  }
+
+  var moveCall = function(board, source, target) {
+    if (useServer) {
+      var response = $.ajax({
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        url: "http://192.168.99.100:51234/move",
+        data: JSON.stringify({data:[board, source, target]}),
+        async: false
+      }).responseText
+      console.log(response)
+      return JSON.parse(response)
+    } else {
+      return ostinato.chess.js.Js().move(board, source, target)
+    }
+  }
+
+  var basicAiMoveCall = function(board, aiPlayer, depth, debug) {
+    if (useServer) {
+      var response = $.ajax({
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        url: "http://192.168.99.100:51234/basicAiMove",
+        data: JSON.stringify({data:[board, aiPlayer, parseInt(depth), debug == true]}),
+        async: false
+      }).responseText
+      console.log(response)
+      return JSON.parse(response)
+    } else {
+      return ostinato.chess.js.Js().basicAiMove(board, aiPlayer, parseInt(depth), debug == true)
     }
   }
 
