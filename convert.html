@@ -200,7 +200,7 @@ var doRefresh = function(notation, nowait) {
     clearTimeout(timer);
     timer = setTimeout(function () {
 
-        var result = ostinato.chess.js.Js().convertNotation(document.getElementById('input').value, notation)
+        var result = ostinato.chess.js.Js().convertNotation(document.getElementById('input').value, "" + notation)
 
         fullAction = 1
         halfAction = 0
