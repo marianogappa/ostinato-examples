@@ -213,8 +213,8 @@ var init = function() {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "http://192.168.99.100:51234/move",
-        data: JSON.stringify({data:[board, source, target]}),
+        url: "http://" + useServer + "/move",
+        data: JSON.stringify({board:board, from:source, to:target}),
         async: false
       }).responseText
       console.log(response)
@@ -230,8 +230,8 @@ var init = function() {
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        url: "http://192.168.99.100:51234/basicAiMove",
-        data: JSON.stringify({data:[board, aiPlayer, parseInt(depth), debug == true]}),
+        url: "http://" + useServer + "/basicAiMove",
+        data: JSON.stringify({board:board, player:aiPlayer, depth:parseInt(depth), debug:debug == true}),
         async: false
       }).responseText
       console.log(response)
