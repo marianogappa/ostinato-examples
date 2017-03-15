@@ -65,22 +65,19 @@
 <section>
 <h1>Chess Auto-play</h1>
 <div id="board" style="width: 400px"></div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/chessboard-0.3.0.min.js"></script>
 <script type="text/javascript" src="ostinato.js"></script>
 <script>
 var boardUi = null
 var initialBoard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 var board = initialBoard
-var aiPlayer = 'white'
 
 var init = function() {
 
     var update = function() {
-        aiMove = ostinato.chess.js.Js().randomAiMove(board, aiPlayer)
-        console.log(aiMove)
+        aiMove = ostinato.chess.js.Js().randomAiMove(board)
         board = (!aiMove.success || aiMove.isCheckMate || aiMove.isDraw) ? initialBoard : aiMove.board
-        aiPlayer = (aiPlayer == 'white') ?'black' : 'white'
         boardUi.position(board)
         window.setTimeout(update, 600)
     }
@@ -99,14 +96,12 @@ var init = function() {
 var boardUi = null
 var initialBoard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 var board = initialBoard
-var aiPlayer = 'white'
 
 var init = function() {
 
     var update = function() {
-        <b>aiMove = ostinato.chess.js.Js().randomAiMove(board, aiPlayer)</b>
+        <b>aiMove = ostinato.chess.js.Js().randomAiMove(board)</b>
         board = (!aiMove.success || aiMove.isCheckMate || aiMove.isDraw) ? initialBoard : aiMove.board
-        aiPlayer = (aiPlayer == 'white') ?'black' : 'white'
         boardUi.position(board)
         window.setTimeout(update, 600)
     }

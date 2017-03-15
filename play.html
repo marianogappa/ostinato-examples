@@ -96,7 +96,7 @@
   </form>
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/chessboard-0.3.0.min.js"></script>
 <script type="text/javascript" src="ostinato.js"></script>
 <script>
@@ -231,13 +231,13 @@ var init = function() {
         dataType: "json",
         contentType: "application/json",
         url: "http://" + useServer + "/basicAiMove",
-        data: JSON.stringify({board:board, player:aiPlayer, depth:parseInt(depth), debug:debug == true}),
+        data: JSON.stringify({board:board, depth:parseInt(depth), debug:debug == true}),
         async: false
       }).responseText
       console.log(response)
       return JSON.parse(response)
     } else {
-      return ostinato.chess.js.Js().basicAiMove(board, aiPlayer, parseInt(depth), debug == true)
+      return ostinato.chess.js.Js().basicAiMove(board, parseInt(depth), debug == true)
     }
   }
 
