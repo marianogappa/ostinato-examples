@@ -193,7 +193,7 @@ var init = function() {
 
 var currentBoard = function() {
     if (currentPosition == -1)
-      return ostinato.chess.js.Js().defaultGame
+      return ostinato.defaultGame
     else
       return positions[currentPosition]
 }
@@ -222,7 +222,7 @@ var refresh = function() {
     var input = document.getElementById('input')
     var target = document.getElementById('actions')
 
-    var parsedNotation = ostinato.chess.js.Js().parseNotation(document.getElementById('input').value)
+    var parsedNotation = ostinato.parseNotation(document.getElementById('input').value)
 
     currentPosition = -1
     board.position(currentBoard())

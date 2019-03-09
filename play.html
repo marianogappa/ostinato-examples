@@ -220,7 +220,7 @@ var init = function() {
       console.log(response)
       return JSON.parse(response)
     } else {
-      return ostinato.chess.js.Js().move(board, source, target)
+      return ostinato.move(board, source, target)
     }
   }
 
@@ -237,7 +237,7 @@ var init = function() {
       console.log(response)
       return JSON.parse(response)
     } else {
-      return ostinato.chess.js.Js().basicAiMove(board, parseInt(depth), debug == true)
+      return ostinato.basicAiMove(board, parseInt(depth), debug == true)
     }
   }
 
