@@ -126,6 +126,14 @@
         footer a:hover {
             text-decoration: underline;
         }
+        input {
+            font-size: 16px;
+            padding: 8px;
+            font-family: monospace;
+        }
+        #output {
+            margin-bottom: 100px;
+        }
     </style>
     <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </head>
@@ -143,6 +151,13 @@
     <h1>Chess Match Notation Converter</h1>
 </section>
 <section>
+<script src="js/chessboard-0.3.0.min.js"></script>
+<h3>Initial board looks like</h3>
+<input id="initialBoard" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)" size="55"
+    value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" />
+    <span><a href="https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN Notation</a></span><br/><br/>
+
+<div id="board" style="width: 400px"></div>
 <h3>Paste a chess match here</h3>
 <textarea id="input" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)">
 </textarea><br/>
@@ -178,20 +193,21 @@ function resetInput(s) {
 var board = null
 
 var init = function() {
+    // Parse query string
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
-// Parse query string
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+    match = getParameterByName('match') || iccf
 
-match = getParameterByName('match') || iccf
+    board = ChessBoard('board');
+    board.start()
 
-
-doRefresh()
-document.getElementById('input').innerHTML = match;
+    doRefresh()
+    document.getElementById('input').innerHTML = match;
 };
 
 var timer;
@@ -200,7 +216,9 @@ var doRefresh = function(notation, nowait) {
     clearTimeout(timer);
     timer = setTimeout(function () {
 
-        var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation)
+        var initialBoard = "" + document.getElementById('initialBoard').value || undefined
+        board.position(initialBoard)
+        var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialBoard)
 
         fullAction = 1
         halfAction = 0
