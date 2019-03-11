@@ -134,6 +134,24 @@
         #output {
             margin-bottom: 100px;
         }
+        #initialBoardWrapper {
+            display: flex;
+            flex-direction: row;
+        }
+        #optionsWrapper {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            margin-top: 40px;
+            width: 150px;
+        }
+        #optionsWrapper span {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+        #optionsWrapper input {
+            margin-right: 5px;
+        }
     </style>
     <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </head>
@@ -153,11 +171,18 @@
 <section>
 <script src="js/chessboard-0.3.0.min.js"></script>
 <h3>Initial board looks like</h3>
-<input id="initialBoard" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)" size="55"
-    value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" />
-    <span><a href="https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN Notation</a></span><br/><br/>
+<div id="initialBoardWrapper">
+    <div id="initialBoard" style="width: 300px"></div>
+    <div id="optionsWrapper">
+        <button id="startBtn">Normal board</button>
+        <button id="clearBtn">Empty board</button>
+        <span><input id="playsNext" name="playsNext" type="radio" value="w" checked="checked">White plays next</input></span>
+        <span><input id="playsNext" name="playsNext" type="radio" value="b"></input>Black plays next</span>
+        <span>Drag pieces in and out of the board (or use the buttons) to produce your initial board.
+        </span>
+    </div>
+</div>
 
-<div id="board" style="width: 400px"></div>
 <h3>Paste a chess match here</h3>
 <textarea id="input" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)">
 </textarea><br/>
@@ -190,7 +215,7 @@ function resetInput(s) {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="ostinato.js"></script>
 <script>
-var board = null
+var initialBoard = null
 
 var init = function() {
     // Parse query string
@@ -203,8 +228,15 @@ var init = function() {
 
     match = getParameterByName('match') || iccf
 
-    board = ChessBoard('board');
-    board.start()
+    initialBoard = ChessBoard('initialBoard', {
+        draggable: true,
+        dropOffBoard: 'trash',
+        sparePieces: true,
+        onChange: function() { doRefresh(document.getElementById('notation').value, false) }
+    });
+    initialBoard.start()
+    $('#startBtn').on('click', initialBoard.start);
+    $('#clearBtn').on('click', initialBoard.clear);
 
     doRefresh()
     document.getElementById('input').innerHTML = match;
@@ -215,11 +247,9 @@ var doRefresh = function(notation, nowait) {
     waitTime = nowait ? 0 : 1000
     clearTimeout(timer);
     timer = setTimeout(function () {
+        var initialFEN = `${initialBoard.fen()} ${document.getElementById('playsNext').value} KQkq - 0 1`
 
-        var initialBoard = "" + document.getElementById('initialBoard').value || undefined
-        board.position(initialBoard)
-        var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialBoard)
-
+        var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialFEN)
         fullAction = 1
         halfAction = 0
         currentAction = 0
