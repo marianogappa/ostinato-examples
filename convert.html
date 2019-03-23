@@ -194,9 +194,11 @@
         <option value="ICCF Notation">ICCF Notation</option>
         <option value="Smith Notation">Smith Notation</option>
     </select>
-<h3>Converted match</h3>
-<div id="output">
-</div>
+<section style="padding-bottom: 50px">
+        <h1>Converted match</h1>
+        <div id="board" style="width: 300px"></div>
+        <div id="actions"></div>
+</section>
 <script>
 var pgn = "[Event \"Ostinato Testing\"]\n[Site \"Buenos Aires, Argentina\"]\n[Date \"2015.??.??\"]\n[Round \"1\"]\n[Result \"½–½\"]\n[White \"Fake Player 1\"]\n[Black \"Fake Player 2\"]\n1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. Nge2\ndxe4 7. 0-0\n";
 var algebraic = "e4 e6\nd4 d5\nNc3 Bb4\nBb5+ Bd7\nBxd7+ Qxd7\nNge2 dxe4\n0-0";
@@ -216,6 +218,10 @@ function resetInput(s) {
 <script type="text/javascript" src="ostinato.js"></script>
 <script>
 var initialBoard = null
+var board = null
+var currentPosition = -1
+var positions = []
+var initialFEN = ostinato.defaultGame
 
 var init = function() {
     // Parse query string
@@ -238,17 +244,45 @@ var init = function() {
     $('#startBtn').on('click', initialBoard.start);
     $('#clearBtn').on('click', initialBoard.clear);
 
+    board = ChessBoard('board');
+    board.start()
+
     doRefresh()
     document.getElementById('input').innerHTML = match;
 };
+
+var currentBoard = function() {
+    if (currentPosition == -1)
+      return initialFEN
+    else
+      return positions[currentPosition]
+}
+
+var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button><button id="next" onclick="javascript:next()">&gt</button>'
+
+var next = function() {
+    if (currentPosition < positions.length - 1) {
+      currentPosition += 1
+      board.position(currentBoard())
+    }
+}
+
+var previous = function() {
+    if (currentPosition > -1) {
+      currentPosition -= 1
+      board.position(currentBoard())
+    }
+}
+
 
 var timer;
 var doRefresh = function(notation, nowait) {
     waitTime = nowait ? 0 : 1000
     clearTimeout(timer);
     timer = setTimeout(function () {
-        var initialFEN = `${initialBoard.fen()} ${document.getElementById('playsNext').value} KQkq - 0 1`
+        initialFEN = `${initialBoard.fen()} ${document.getElementById('playsNext').value} KQkq - 0 1`
 
+        var target = document.getElementById('actions')
         var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialFEN)
         fullAction = 1
         halfAction = 0
@@ -261,9 +295,11 @@ var doRefresh = function(notation, nowait) {
             halfAction++
 
             if (result.validActionCount >= currentAction + 1)
-                actionsString += result.actions[currentAction] + ' '
-            else
-                actionsString += '<i>' + result.actions[currentAction] + '</i> '
+            actionsString += '<a href="javascript:currentPosition=' + currentAction +
+                '; javascript:board.position(currentBoard())">' + result.actions[currentAction] +
+                '</a> '
+        else
+            actionsString += '<i>' + result.actions[currentAction] + '</i> '
 
             currentAction++
             if (halfAction == 2) {
@@ -273,7 +309,13 @@ var doRefresh = function(notation, nowait) {
             }
         }
 
-        document.getElementById('output').innerHTML = actionsString
+        var parsedNotation = ostinato.parseNotation(document.getElementById('input').value, initialFEN)
+
+        currentPosition = -1
+        board.position(currentBoard())
+        positions = parsedNotation.boards
+
+        target.innerHTML = buttons + actionsString
     }, waitTime);
 }
 
