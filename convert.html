@@ -262,15 +262,28 @@ var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button
 
 var next = function() {
     if (currentPosition < positions.length - 1) {
-      currentPosition += 1
-      board.position(currentBoard())
+        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+        currentPosition += 1
+        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+        board.position(currentBoard())
     }
 }
 
 var previous = function() {
     if (currentPosition > -1) {
-      currentPosition -= 1
-      board.position(currentBoard())
+        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+        currentPosition -= 1
+        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+        board.position(currentBoard())
+    }
+}
+
+var moveTo = function(i) {
+    if (currentPosition > -1) {
+        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+        currentPosition = i
+        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+        board.position(currentBoard())
     }
 }
 
@@ -290,16 +303,15 @@ var doRefresh = function(notation, nowait) {
         actionsString = ''
         for (action in result.actions) {
             if (halfAction == 0)
-                actionsString += '<div class="line">' + fullAction + '. '
+                actionsString += `<div class="line">` + fullAction + '. '
 
             halfAction++
 
             if (result.validActionCount >= currentAction + 1)
-            actionsString += '<a href="javascript:currentPosition=' + currentAction +
-                '; javascript:board.position(currentBoard())">' + result.actions[currentAction] +
-                '</a> '
-        else
-            actionsString += '<i>' + result.actions[currentAction] + '</i> '
+            actionsString += `<a class="position_${currentAction}" href="javascript:moveTo(${currentAction})">
+                ${result.actions[currentAction]}</a> `
+            else
+                actionsString += '<i>' + result.actions[currentAction] + '</i> '
 
             currentAction++
             if (halfAction == 2) {
