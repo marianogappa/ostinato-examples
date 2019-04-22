@@ -237,6 +237,7 @@ var init = function() {
     initialBoard = ChessBoard('initialBoard', {
         draggable: true,
         dropOffBoard: 'trash',
+        showNotation: false,
         sparePieces: true,
         onChange: function() { doRefresh(document.getElementById('notation').value, false) }
     });
@@ -244,7 +245,9 @@ var init = function() {
     $('#startBtn').on('click', initialBoard.start);
     $('#clearBtn').on('click', initialBoard.clear);
 
-    board = ChessBoard('board');
+    board = ChessBoard('board', {
+        showNotation: false
+    });
     board.start()
 
     doRefresh()
