@@ -1696,4 +1696,4 @@ ca.org=ca.org||{};ca.org.scalatest=ca.org.scalatest||{};ca.org.scalatest.Feature
 ca.org.scalatest.FunSpec=function(){var a=new NV;NV.prototype.a.call(a);return a};ca.org.scalatest.FunSpec.prototype=NV.prototype;ca.org=ca.org||{};ca.org.scalatest=ca.org.scalatest||{};ca.org.scalatest.FunSuite=function(){var a=new OV;OV.prototype.a.call(a);return a};ca.org.scalatest.FunSuite.prototype=OV.prototype;ca.org=ca.org||{};ca.org.scalatest=ca.org.scalatest||{};ca.org.scalatest.PropSpec=function(){var a=new PV;PV.prototype.a.call(a);return a};ca.org.scalatest.PropSpec.prototype=PV.prototype;
 ca.org=ca.org||{};ca.org.scalatest=ca.org.scalatest||{};ca.org.scalatest.FlatSpec=function(){var a=new hW;hW.prototype.a.call(a);return a};ca.org.scalatest.FlatSpec.prototype=hW.prototype;ca.org=ca.org||{};ca.org.scalatest=ca.org.scalatest||{};ca.org.scalatest.WordSpec=function(){var a=new iW;iW.prototype.a.call(a);return a};ca.org.scalatest.WordSpec.prototype=iW.prototype;
 }).call(this);
-//# sourceMappingURL=ostinato-opt.js.map
+//# sourceMappingURL=ostinato.js.map
