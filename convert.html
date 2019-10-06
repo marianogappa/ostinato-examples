@@ -232,7 +232,7 @@ var init = function() {
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    match = getParameterByName('match') || iccf
+    match = getParameterByName('match') || descriptive
 
     initialBoard = ChessBoard('initialBoard', {
         draggable: true,
