@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Chess Match Notation Converter</title>
@@ -7,36 +8,87 @@
     <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <style>
-        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,hr {
-        margin:0;
-        padding:0;
+        body,
+        div,
+        dl,
+        dt,
+        dd,
+        ul,
+        ol,
+        li,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        pre,
+        form,
+        fieldset,
+        input,
+        textarea,
+        p,
+        blockquote,
+        th,
+        td,
+        hr {
+            margin: 0;
+            padding: 0;
         }
+
         table {
-        border-collapse:collapse;
-        border-spacing:0;
+            border-collapse: collapse;
+            border-spacing: 0;
         }
-        fieldset,img {
-        border:0;
+
+        fieldset,
+        img {
+            border: 0;
         }
-        address,caption,cite,code,dfn,em,strong,th,var {
-        font-style:normal;
-        font-weight:normal;
+
+        address,
+        caption,
+        cite,
+        code,
+        dfn,
+        em,
+        strong,
+        th,
+        var {
+            font-style: normal;
+            font-weight: normal;
         }
-        ol,ul {
-        list-style:none;
+
+        ol,
+        ul {
+            list-style: none;
         }
-        caption,th {
-        text-align:left;
+
+        caption,
+        th {
+            text-align: left;
         }
-        h1,h2,h3,h4,h5,h6 {
-        font-size:100%;
-        font-weight:normal;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 100%;
+            font-weight: normal;
         }
-        q:before,q:after {
-        content:'';
+
+        q:before,
+        q:after {
+            content: '';
         }
-        abbr,acronym { border:0;
+
+        abbr,
+        acronym {
+            border: 0;
         }
+
     </style>
 
     <style>
@@ -46,52 +98,63 @@
             padding: 0px;
             margin: 0px;
         }
+
         section {
             padding-left: 15px;
         }
+
         i {
             font-weight: normal;
             color: red;
         }
+
         h1 {
             font-weight: bolder;
             font-size: 24px;
             padding-top: 20px;
             padding-bottom: 10px;
         }
+
         h3 {
             font-weight: bolder;
             font-size: 18px;
             padding-top: 20px;
             padding-bottom: 10px;
         }
+
         .examples a {
             display: inline-block;
             padding-left: 15px;
             padding-bottom: 5px;
         }
+
         .line {
             padding-bottom: 3px;
             font-size: 12px;
         }
+
         button {
             padding: 10px;
             margin-bottom: 10px;
             cursor: pointer;
         }
+
         .play {
             color: white;
             font-weight: bolder;
             background-color: rgb(240, 0, 0);
             border: 1px solid rgb(200, 0, 0);
         }
+
         .play:hover {
             background-color: rgb(220, 0, 0);
             box-shadow: 1px 1px 1px gray;
         }
+
         #previous {
             margin-right: 10px;
         }
+
         textarea {
             display: inline-block;
             height: 200px;
@@ -101,21 +164,33 @@
             font-family: 'PT Serif';
             border-color: #CCC;
         }
-        #actions, #board, .examples {
+
+        #actions,
+        #board,
+        .examples {
             display: inline-block;
             vertical-align: top;
         }
+
         #actions {
             padding-left: 15px;
         }
+
         #board {
             margin-bottom: 15px;
         }
+
         footer {
-            position: fixed; bottom: 0px; width: 100%; height: 50px; background-color: gray; color: white;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 50px;
+            background-color: gray;
+            color: white;
             line-height: 50px;
             padding-left: 15px;
         }
+
         footer a {
             font-family: "Open Sans", sans-serif;
             font-size: 14px;
@@ -123,21 +198,26 @@
             color: white;
             padding-right: 15px;
         }
+
         footer a:hover {
             text-decoration: underline;
         }
+
         input {
             font-size: 16px;
             padding: 8px;
             font-family: monospace;
         }
+
         #output {
             margin-bottom: 100px;
         }
+
         #initialBoardWrapper {
             display: flex;
             flex-direction: row;
         }
+
         #optionsWrapper {
             display: flex;
             flex-direction: column;
@@ -145,212 +225,260 @@
             margin-top: 40px;
             width: 150px;
         }
+
         #optionsWrapper span {
             width: 150px;
             margin-bottom: 10px;
         }
+
         #optionsWrapper input {
             margin-right: 5px;
         }
+
     </style>
-    <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-</head>
-<body>
-<a href="https://github.com/MarianoGappa/ostinato" class="github-corner">
-    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
-        </path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
 
-<section>
-    <h1>Chess Match Notation Converter</h1>
-</section>
-<section>
-<script src="js/chessboard-0.3.0.min.js"></script>
-<h3>Initial board looks like</h3>
-<div id="initialBoardWrapper">
-    <div id="initialBoard" style="width: 300px"></div>
-    <div id="optionsWrapper">
-        <button id="startBtn">Full board</button>
-        <button id="clearBtn">Empty board</button>
-        <span><input id="playsNext" name="playsNext" type="radio" value="w" checked="checked">White plays next</input></span>
-        <span><input id="playsNext" name="playsNext" type="radio" value="b"></input>Black plays next</span>
-        <span>Drag pieces in and out of the board (or use the buttons) to produce your initial board.
-        </span>
-    </div>
-</div>
+        @keyframes octocat-wave {
 
-<h3>Paste a chess match here</h3>
-<textarea id="input" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)">
-</textarea><br/>
-    <select id="notation" onchange="javascript:doRefresh(document.getElementById('notation').value, true)">
-        <option value="Algebraic Notation" selected="selected">Algebraic Notation</option>
-        <option value="Figurine Algebraic Notation">Figurine Algebraic Notation</option>
-        <option value="Descriptive Notation">Descriptive Notation</option>
-        <option value="Coordinate Notation">Coordinate Notation</option>
-        <option value="ICCF Notation">ICCF Notation</option>
-        <option value="Smith Notation">Smith Notation</option>
-    </select>
-<section style="padding-bottom: 50px">
-        <h1>Converted match</h1>
-        <div id="board" style="width: 300px"></div>
-        <div id="actions"></div>
-</section>
-<script>
-var pgn = "[Event \"Ostinato Testing\"]\n[Site \"Buenos Aires, Argentina\"]\n[Date \"2015.??.??\"]\n[Round \"1\"]\n[Result \"½–½\"]\n[White \"Fake Player 1\"]\n[Black \"Fake Player 2\"]\n1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. Nge2\ndxe4 7. 0-0\n";
-var algebraic = "e4 e6\nd4 d5\nNc3 Bb4\nBb5+ Bd7\nBxd7+ Qxd7\nNge2 dxe4\n0-0";
-var coordinate = "1. e2-e4 e7-e6\n2. d2-d4 d7-d5\n3. b1-c3 f8-b4\n4. f1-b5+ c8-d7\n5. b5xd7+ d8xd7\n6. g1-e2 d5xe4\n7. 0-0";
-var descriptive = "1. P-K4 P-K3\n2. P-Q4 P-Q4\n3. N-QB3 B-N5\n4. B-N5ch B-Q2\n5. BxBch QxB\n6. KN-K2 PxP\n7. 0-0";
-var iccf = "1. 5254 5756\n2. 4244 4745\n3. 2133 6824\n4. 6125 3847\n5. 2547 4847\n6. 7152 4554\n7. 5171";
-var smith = "1. e2e4  e7e6\n2. d2d4  d7d5\n3. b1c3  f8b4\n4. f1b5  c8d7\n5. b5d7b d8d7b\n6. g1e2  d5e4p\n7. e1g1c";
+            0%,
+            100% {
+                transform: rotate(0)
+            }
 
-function resetInput(s) {
-    document.getElementById('input').value = s
-    doRefresh()
-}
-</script>
-</section>
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="ostinato.js"></script>
-<script>
-var initialBoard = null
-var board = null
-var currentPosition = -1
-var positions = []
-var initialFEN = ostinato.defaultGame
-
-var init = function() {
-    // Parse query string
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-    match = getParameterByName('match') || descriptive
-
-    initialBoard = ChessBoard('initialBoard', {
-        draggable: true,
-        dropOffBoard: 'trash',
-        showNotation: false,
-        sparePieces: true,
-        onChange: function() { doRefresh(document.getElementById('notation').value, false) }
-    });
-    initialBoard.start()
-    $('#startBtn').on('click', initialBoard.start);
-    $('#clearBtn').on('click', initialBoard.clear);
-
-    board = ChessBoard('board', {
-        showNotation: false
-    });
-    board.start()
-
-    doRefresh()
-    document.getElementById('input').innerHTML = match;
-};
-
-var currentBoard = function() {
-    if (currentPosition == -1)
-      return initialFEN
-    else
-      return positions[currentPosition]
-}
-
-var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button><button id="next" onclick="javascript:next()">&gt</button>'
-
-var next = function() {
-    if (currentPosition < positions.length - 1) {
-        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
-        currentPosition += 1
-        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
-        board.position(currentBoard())
-    }
-}
-
-var previous = function() {
-    if (currentPosition > -1) {
-        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
-        currentPosition -= 1
-        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
-        board.position(currentBoard())
-    }
-}
-
-var moveTo = function(i) {
-    if (currentPosition > -1) {
-        $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
-        currentPosition = i
-        $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
-        board.position(currentBoard())
-    }
-}
-
-
-var timer;
-var doRefresh = function(notation, nowait) {
-    waitTime = nowait ? 0 : 1000
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-        initialFEN = `${initialBoard.fen()} ${document.getElementById('playsNext').value} KQkq - 0 1`
-
-        var target = document.getElementById('actions')
-        var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialFEN)
-        fullAction = 1
-        halfAction = 0
-        currentAction = 0
-        actionsString = ''
-        for (action in result.actions) {
-            if (halfAction == 0)
-                actionsString += `<div class="line">` + fullAction + '. '
-
-            halfAction++
-
-            if (result.validActionCount >= currentAction + 1)
-            actionsString += `<a class="position_${currentAction}" href="javascript:moveTo(${currentAction})">
-                ${result.actions[currentAction]}</a> `
-            else
-                actionsString += '<i>' + result.actions[currentAction] + '</i> '
-
-            currentAction++
-            if (halfAction == 2) {
-                halfAction = 0
-                fullAction++
-                actionsString += '</div>'
+            40%,
+            80% {
+                transform: rotate(10deg)
             }
         }
 
-        var parsedNotation = ostinato.parseNotation(document.getElementById('input').value, initialFEN)
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
 
-        currentPosition = -1
-        board.position(currentBoard())
-        positions = parsedNotation.boards
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
 
-        target.innerHTML = buttons + actionsString
-    }, waitTime);
-}
+    </style>
+</head>
 
-$(document).ready(init);
-</script>
+<body>
+    <a href="https://github.com/MarianoGappa/ostinato" class="github-corner">
+        <svg width="80" height="80" viewBox="0 0 250 250"
+            style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+            </path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
 
-<footer>
-    <a href="https://twitter.com/MarianoGappa">@MarianoGappa</a> <a href="https://github.com/MarianoGappa/ostinato">Ostinato Library</a> <a href="https://github.com/MarianoGappa/ostinato/issues">Bug Report</a>
-    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-hashtags="ostinato">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <section>
+        <h1>Chess Match Notation Converter</h1>
+    </section>
+    <section>
+        <script src="js/chessboard-0.3.0.min.js"></script>
+        <h3>Initial board looks like</h3>
+        <div id="initialBoardWrapper">
+            <div id="initialBoard" style="width: 300px"></div>
+            <div id="optionsWrapper">
+                <button id="startBtn">Full board</button>
+                <button id="clearBtn">Empty board</button>
+                <span><input id="playsNext" name="playsNext" type="radio" value="w" checked="checked">White plays
+                    next</input></span>
+                <span><input id="playsNext" name="playsNext" type="radio" value="b"></input>Black plays next</span>
+                <span>Drag pieces in and out of the board (or use the buttons) to produce your initial board.
+                </span>
+            </div>
+        </div>
 
-  ga('create', 'UA-58930438-3', 'auto');
-  ga('send', 'pageview');
+        <h3>Paste a chess match here</h3>
+        <textarea id="input" onkeyup="javascript:doRefresh(document.getElementById('notation').value, false)">
+</textarea><br />
+        <select id="notation" onchange="javascript:doRefresh(document.getElementById('notation').value, true)">
+            <option value="Algebraic Notation" selected="selected">Algebraic Notation</option>
+            <option value="Figurine Algebraic Notation">Figurine Algebraic Notation</option>
+            <option value="Descriptive Notation">Descriptive Notation</option>
+            <option value="Coordinate Notation">Coordinate Notation</option>
+            <option value="ICCF Notation">ICCF Notation</option>
+            <option value="Smith Notation">Smith Notation</option>
+        </select>
+        <section style="padding-bottom: 50px">
+            <h1>Converted match</h1>
+            <div id="board" style="width: 300px"></div>
+            <div id="actions"></div>
+        </section>
+        <script>
+            var pgn = "[Event \"Ostinato Testing\"]\n[Site \"Buenos Aires, Argentina\"]\n[Date \"2015.??.??\"]\n[Round \"1\"]\n[Result \"½–½\"]\n[White \"Fake Player 1\"]\n[Black \"Fake Player 2\"]\n1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. Nge2\ndxe4 7. 0-0\n";
+            var algebraic = "e4 e6\nd4 d5\nNc3 Bb4\nBb5+ Bd7\nBxd7+ Qxd7\nNge2 dxe4\n0-0";
+            var coordinate = "1. e2-e4 e7-e6\n2. d2-d4 d7-d5\n3. b1-c3 f8-b4\n4. f1-b5+ c8-d7\n5. b5xd7+ d8xd7\n6. g1-e2 d5xe4\n7. 0-0";
+            var descriptive = "1. P-K4 P-K3\n2. P-Q4 P-Q4\n3. N-QB3 B-N5\n4. B-N5ch B-Q2\n5. BxBch QxB\n6. KN-K2 PxP\n7. 0-0";
+            var iccf = "1. 5254 5756\n2. 4244 4745\n3. 2133 6824\n4. 6125 3847\n5. 2547 4847\n6. 7152 4554\n7. 5171";
+            var smith = "1. e2e4  e7e6\n2. d2d4  d7d5\n3. b1c3  f8b4\n4. f1b5  c8d7\n5. b5d7b d8d7b\n6. g1e2  d5e4p\n7. e1g1c";
 
-</script>
+            function resetInput(s) {
+                document.getElementById('input').value = s
+                doRefresh()
+            }
+        </script>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="ostinato.js"></script>
+    <script>
+        var initialBoard = null
+        var board = null
+        var currentPosition = -1
+        var positions = []
+        var initialFEN = ostinato.defaultGame
+
+        var init = function () {
+            // Parse query string
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            match = getParameterByName('match') || descriptive
+
+            initialBoard = ChessBoard('initialBoard', {
+                draggable: true,
+                dropOffBoard: 'trash',
+                showNotation: false,
+                sparePieces: true,
+                onChange: function () { doRefresh(document.getElementById('notation').value, false) }
+            });
+            initialBoard.start()
+            $('#startBtn').on('click', initialBoard.start);
+            $('#clearBtn').on('click', initialBoard.clear);
+
+            board = ChessBoard('board', {
+                showNotation: false
+            });
+            board.start()
+
+            doRefresh()
+            document.getElementById('input').innerHTML = match;
+        };
+
+        var currentBoard = function () {
+            if (currentPosition == -1)
+                return initialFEN
+            else
+                return positions[currentPosition]
+        }
+
+        var buttons = '<button id="previous" onclick="javascript:previous()">&lt</button><button id="next" onclick="javascript:next()">&gt</button>'
+
+        var next = function () {
+            if (currentPosition < positions.length - 1) {
+                $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+                currentPosition += 1
+                $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+                board.position(currentBoard())
+            }
+        }
+
+        var previous = function () {
+            if (currentPosition > -1) {
+                $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+                currentPosition -= 1
+                $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+                board.position(currentBoard())
+            }
+        }
+
+        var moveTo = function (i) {
+            if (currentPosition > -1) {
+                $(`.position_${currentPosition}`).css('font-weight', 'normal').css('color', 'blue')
+                currentPosition = i
+                $(`.position_${currentPosition}`).css('font-weight', 'bolder').css('color', 'midnightblue')
+                board.position(currentBoard())
+            }
+        }
+
+
+        var timer;
+        var doRefresh = function (notation, nowait) {
+            waitTime = nowait ? 0 : 1000
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                initialFEN = `${initialBoard.fen()} ${document.getElementById('playsNext').value} KQkq - 0 1`
+
+                var target = document.getElementById('actions')
+                var result = ostinato.convertNotation(document.getElementById('input').value, "" + notation, initialFEN)
+                fullAction = 1
+                halfAction = 0
+                currentAction = 0
+                actionsString = ''
+                for (action in result.actions) {
+                    if (halfAction == 0)
+                        actionsString += `<div class="line">` + fullAction + '. '
+
+                    halfAction++
+
+                    if (result.validActionCount >= currentAction + 1)
+                        actionsString += `<a class="position_${currentAction}" href="javascript:moveTo(${currentAction})">
+                ${result.actions[currentAction]}</a> `
+                    else
+                        actionsString += '<i>' + result.actions[currentAction] + '</i> '
+
+                    currentAction++
+                    if (halfAction == 2) {
+                        halfAction = 0
+                        fullAction++
+                        actionsString += '</div>'
+                    }
+                }
+
+                var parsedNotation = ostinato.parseNotation(document.getElementById('input').value, initialFEN)
+
+                currentPosition = -1
+                board.position(currentBoard())
+                positions = parsedNotation.boards
+
+                target.innerHTML = buttons + actionsString
+            }, waitTime);
+        }
+
+        $(document).ready(init);
+    </script>
+
+    <footer>
+        <a href="https://twitter.com/MarianoGappa">@MarianoGappa</a> <a
+            href="https://github.com/MarianoGappa/ostinato">Ostinato Library</a> <a
+            href="https://github.com/MarianoGappa/ostinato/issues">Bug Report</a>
+        <a href="https://twitter.com/share" class="twitter-share-button" {count} data-hashtags="ostinato">Tweet</a>
+        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+    </footer>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-58930438-3', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </body>
+
 </html>
